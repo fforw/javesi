@@ -14,12 +14,7 @@ public class EntitySystemTest
     @Test
     public void testEntitySystem()
     {
-        Set<Class<? extends Component>> set = new HashSet<Class<? extends Component>>();
-        set.add(ComponentA.class);
-        set.add(ComponentB.class);
-        set.add(ComponentC.class);
-
-        EntitySystem system = EntitySystem.forComponentClasses(set);
+        EntitySystem system = createTestSystem();
 
         assertThat(system.entities().size(), is(0));
 
@@ -70,15 +65,14 @@ public class EntitySystemTest
         assertThat(entitiesWithA.contains(a),is(true));
         assertThat(entitiesWithA.contains(c),is(true));
 
-        Set<Integer> entitiesWithAandB = system.findEntitiesWithComponents(ComponentA.class,ComponentB.class);
+        Set<Integer> entitiesWithAandB = system.findEntitiesWithComponents(ComponentA.class, ComponentB.class);
         assertThat(entitiesWithB.size(),is(1));
         assertThat(entitiesWithB.contains(a),is(true));
 
         system.killEntity(c);
 
         assertThat(system.entities().contains(c), is(false) );
-
-        assertThat(system.hasComponent(c,ComponentA.class), is(false));
+        assertThat(system.getComponentInternal(c,ComponentA.class), is(nullValue()));
 
         // kill entity
 
@@ -87,11 +81,21 @@ public class EntitySystemTest
         assertThat(componentsWithAAfterRemoval.contains(a), is(true));
 
         // remove component
-        assertThat(system.hasComponent(a,ComponentB.class), is(true));
-        system.removeComponent(a,ComponentB.class);
-        assertThat(system.hasComponent(a,ComponentB.class), is(false));
+        assertThat(system.hasComponent(a, ComponentB.class), is(true));
+        system.removeComponent(a, ComponentB.class);
+        assertThat(system.hasComponent(a, ComponentB.class), is(false));
 
 
+    }
+
+    private EntitySystem createTestSystem()
+    {
+        Set<Class<? extends Component>> set = new HashSet<Class<? extends Component>>();
+        set.add(ComponentA.class);
+        set.add(ComponentB.class);
+        set.add(ComponentC.class);
+
+        return EntitySystem.forComponentClasses(set);
     }
 
     private ComponentA createA(String value)
@@ -112,5 +116,47 @@ public class EntitySystemTest
     private ComponentC createC()
     {
         return new ComponentC();
+    }
+
+    @Test(expected =  EntityNotFoundException.class)
+    public void thatInvalidKillsAreDetected()
+    {
+        createTestSystem().killEntity(42);
+    }
+
+    @Test(expected =  EntityNotFoundException.class)
+    public void thatInvalidGetNameIsDetected()
+    {
+        createTestSystem().nameFor(42);
+    }
+    
+    @Test(expected =  EntityNotFoundException.class)
+    public void thatInvalidComponentRemovesAreDetected()
+    {
+        createTestSystem().removeComponent(42, ComponentA.class);
+    }
+
+    @Test(expected =  EntityNotFoundException.class)
+    public void thatInvalidHasComponentIsDetected()
+    {
+        createTestSystem().hasComponent(42, ComponentA.class);
+    }
+
+    @Test(expected =  EntityNotFoundException.class)
+    public void thatInvalidGetComponentIsDetected()
+    {
+        createTestSystem().getComponent(42, ComponentA.class);
+    }
+
+    @Test(expected =  EntityNotFoundException.class)
+    public void thatInvalidAddComponentIsDetected()
+    {
+        createTestSystem().addComponent(42, new ComponentA());
+    }
+
+    @Test(expected =  EntityNotFoundException.class)
+    public void thatInvalidGetAllComponentsIsDetected()
+    {
+        createTestSystem().getAllComponentsOnEntity(42);
     }
 }
