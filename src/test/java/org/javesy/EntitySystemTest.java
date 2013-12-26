@@ -75,7 +75,7 @@ public class EntitySystemTest
         system.killEntity(c);
 
         assertThat(system.entities().contains(c), is(false) );
-        assertThat(system.getComponentInternal(c,ComponentA.class), is(nullValue()));
+        assertThat(system.getComponentInternal(c, ComponentA.class), is(nullValue()));
 
         // kill entity
 
@@ -98,7 +98,7 @@ public class EntitySystemTest
         set.add(ComponentB.class);
         set.add(ComponentC.class);
 
-        return EntitySystem.forComponentClasses(set);
+        return new SystemBuilder().buildFromComponentClasses(set);
     }
 
     private ComponentA createA(String value)

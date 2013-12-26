@@ -9,11 +9,6 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.9-RC1</version>
-        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -69,6 +64,17 @@
             <scope>test</scope>
         </dependency>
 
+        <!--
+            For us, reflections is just a test dependency.
+            If you want to use SystemBuilder.buildFromPackage, you need to depend on reflections yourself or provide
+            it yourself if you do not use maven.
+        -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.9-RC1</version>
+            <optional>true</optional>
+        </dependency>
 
     </dependencies>
     

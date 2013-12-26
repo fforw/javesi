@@ -1,7 +1,5 @@
 package org.javesy;
 
-import org.reflections.Reflections;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -13,14 +11,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Encapsulates an entity system with a fixed number of known components.
  */
 public final class EntitySystem
 {
+    private static final int INIITAL_ENTITY_CAPACITY = 10000;
     private static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(EntitySystem.class);
+
+    private final static String UNNAMED = "[no name]";
 
     private Class[] componentTypesInHashOrder;
 
@@ -36,11 +36,10 @@ public final class EntitySystem
     private ConcurrentMap<Integer, String> entitiesToNames;
 
     /**
-     * Entity id counter.
+     * Id generator to be used for this system. Can be changed by calling {@link #setEntityName(int, String)} before
+     * adding any entities.
      */
-    private AtomicInteger entityCount = new AtomicInteger(0);
-
-    private final static String UNNAMED = "[no name]";
+    private EntityIdGenerator idGenerator;
 
     /**
      * Constructs a new entity system from a set of component classes with the additional restriction that the
@@ -49,15 +48,18 @@ public final class EntitySystem
      * @param componentClasses
      * @throws ComponentHashNotUniqueException if there are non-unique hash codes
      */
-    private EntitySystem(Set<Class<? extends Component>> componentClasses)
+    EntitySystem(Set<Class<? extends Component>> componentClasses, EntityIdGenerator idGenerator, int initialCapacity)
     {
         try
         {
+            this.idGenerator = idGenerator;
+
             final int numberOfTypes = componentClasses.size();
+
             componentTypesInHashOrder = new Class[numberOfTypes];
             componentStore = new ConcurrentMap[numberOfTypes];
 
-            entitiesToNames = new ConcurrentHashMap<Integer, String>();
+            entitiesToNames = new ConcurrentHashMap<Integer, String>(initialCapacity);
 
             Map<Integer,Class<? extends Component>> knownHashes = new HashMap<Integer,Class<? extends Component>>();
 
@@ -93,18 +95,6 @@ public final class EntitySystem
         {
             throw new JavesyRuntimeException(e);
         }
-    }
-
-    public static EntitySystem scanPackage(String pkg)
-    {
-        Reflections reflections = new Reflections(pkg);
-        Set<Class<? extends Component>> componentTypes = reflections.getSubTypesOf(Component.class);
-        return EntitySystem.forComponentClasses(componentTypes);
-    }
-
-    public static EntitySystem forComponentClasses(Set<Class<? extends Component>> pkg)
-    {
-        return new EntitySystem(pkg);
     }
 
     public int getTypeIndex(Class<? extends Component> componentClass)
@@ -309,9 +299,24 @@ public final class EntitySystem
 
     private int createAndRegisterEntity(String name)
     {
-        int entity = entityCount.getAndIncrement();
+        int entity = idGenerator.getNextEntityId();
         entitiesToNames.put(entity, name);
         return entity;
     }
 
+    /**
+     * Registers an alternate id generator for use with this entity system.
+     *
+     * @param idGenerator
+     */
+
+    public void setIdGenerator(EntityIdGenerator idGenerator)
+    {
+        if (entitiesToNames.size() > 0)
+        {
+            throw new IllegalStateException("Can't change id generator with existing entities.");
+        }
+
+        this.idGenerator = idGenerator;
+    }
 }
