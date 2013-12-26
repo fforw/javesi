@@ -1,5 +1,8 @@
 package org.javesy;
 
+import org.javesy.testcomponents.ComponentA;
+import org.javesy.testcomponents.ComponentB;
+import org.javesy.testcomponents.ComponentC;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.*;
