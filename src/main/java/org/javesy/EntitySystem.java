@@ -170,6 +170,11 @@ public final class EntitySystem
 
     public void setEntityName(int entity, String name)
     {
+        if (name == null)
+        {
+            name = UNNAMED;
+        }
+
         String oldName = entitiesToNames.replace(entity, name);
 
         // there are no null names in our map, so a null means "No entity" here.
