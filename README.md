@@ -19,3 +19,7 @@ Usage
 
 Use org.javesy.EntitySystemBuilder to create the entity system. Use the entity system API to create your own systems
 implementions. Will provide an optional one myself soon.
+
+Asserts
+-------
+javesy uses Java asserts for some extra checking if stale entities are accessed when they shouldn't. Since checking this is not totally cost-free, you can disable and enable these kinds of checks with enable or disable java assertions.
