@@ -15,7 +15,6 @@ public class SystemBuilderTest
     @Test
     public void thatPackageScanningWorks()
     {
-
         Set<Class<? extends Component>> componentClasses = new EntitySystemBuilder().findComponentClasses("org.javesy" +
             ".testcomponents");
 

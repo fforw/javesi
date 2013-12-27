@@ -5,12 +5,16 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class SingletonComponentConnection
+/**
+ * Immutable class to encapsulate the attribution of a singleton component to an entity.
+ *
+ */
+class SingletonComponentConnection
 {
     public final SingletonComponent component;
     public final Entity entity;
 
-    private ComponentSetView componentSet = new ComponentSetView();
+    private ComponentSetView componentSet;
     private EntitySetView entitySet = new EntitySetView();
 
     public SingletonComponentConnection(SingletonComponent component, Entity entity)
@@ -21,7 +25,15 @@ public class SingletonComponentConnection
 
     public Set<Component> components()
     {
-        return componentSet;
+        ComponentSetView set = componentSet;
+
+        if (set == null)
+        {
+            set = new ComponentSetView();
+            componentSet = set;
+        }
+
+        return set;
     }
 
     public Set<Entity> entities()

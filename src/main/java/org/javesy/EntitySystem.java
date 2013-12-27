@@ -4,17 +4,14 @@ import org.javesy.exception.ComponentHashNotUniqueException;
 import org.javesy.id.EntityIdGenerator;
 import org.javesy.util.HashOrderComparator;
 
-import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -54,7 +51,7 @@ public final class EntitySystem
     private ConcurrentMap<Entity, Component> componentStore[];
 
 
-    private SingletonComponentConnection[] singletonComponents;
+    private SingletonComponentConnection[] singletonConnections;
 
     /**
      * Maps entities to their names or <code>null</code>. primary tracker of existing entities.
@@ -77,7 +74,7 @@ public final class EntitySystem
 
         componentTypesInHashOrder = new Class[numberOfComponentTypes];
         componentStore = new ConcurrentMap[numberOfComponentTypes];
-        singletonComponents = new SingletonComponentConnection[numberOfComponentTypes];
+        singletonConnections = new SingletonComponentConnection[numberOfComponentTypes];
 
         entitiesToNames = new ConcurrentHashMap<Entity, String>(config.getInitialEntityCapacity());
 
@@ -134,10 +131,10 @@ public final class EntitySystem
             ConcurrentMap<Entity, Component> map = componentStore[i];
             if (map == null)
             {
-                SingletonComponentConnection connection = singletonComponents[i];
+                SingletonComponentConnection connection = singletonConnections[i];
                 if (connection.entity.id == entity.id )
                 {
-                    singletonComponents[i] = null;
+                    singletonConnections[i] = null;
                 }
             }
             else
@@ -155,10 +152,10 @@ public final class EntitySystem
 
         if (SingletonComponent.class.isAssignableFrom(componentType))
         {
-            SingletonComponentConnection connection = singletonComponents[index];
+            SingletonComponentConnection connection = singletonConnections[index];
             if (connection.entity.id == entity.id)
             {
-                singletonComponents[index] = null;
+                singletonConnections[index] = null;
             }
         }
         else
@@ -182,7 +179,7 @@ public final class EntitySystem
 
         if (SingletonComponent.class.isAssignableFrom(componentType))
         {
-            SingletonComponentConnection connection = singletonComponents[index];
+            SingletonComponentConnection connection = singletonConnections[index];
 
             if (connection != null && connection.entity.id == entity.id)
             {
@@ -238,7 +235,7 @@ public final class EntitySystem
             Component c;
             if (map == null)
             {
-                c = singletonComponents[i].component;
+                c = singletonConnections[i].component;
             }
             else
             {
@@ -262,7 +259,7 @@ public final class EntitySystem
 
         if (SingletonComponent.class.isAssignableFrom(componentType))
         {
-            SingletonComponentConnection connection = singletonComponents[index];
+            SingletonComponentConnection connection = singletonConnections[index];
             return (Collection<T>) (connection != null ? connection.components() : Collections.emptyList());
         }
         else
@@ -277,7 +274,7 @@ public final class EntitySystem
         int index = getTypeIndex(componentType);
         if (SingletonComponent.class.isAssignableFrom(componentType))
         {
-            SingletonComponentConnection connection = singletonComponents[index];
+            SingletonComponentConnection connection = singletonConnections[index];
             return (Set<Entity>) (connection != null ? connection.entities() : Collections.emptySet());
         }
         else
@@ -320,7 +317,7 @@ public final class EntitySystem
 
         if (SingletonComponent.class.isAssignableFrom(componentType))
         {
-            singletonComponents[index] = new SingletonComponentConnection((SingletonComponent)component, entity);
+            singletonConnections[index] = new SingletonComponentConnection((SingletonComponent)component, entity);
         }
         else
         {
