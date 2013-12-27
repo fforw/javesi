@@ -12,11 +12,11 @@ package org.javesy;
  * </p>
  *
  */
-public class Entity
+public final class Entity
 {
-    public final long id;
+    private final long id;
 
-    boolean alive;
+    private boolean alive;
 
     Entity(long id)
     {
@@ -50,5 +50,15 @@ public class Entity
     public boolean isAlive()
     {
         return alive;
+    }
+
+    void setAlive(boolean alive)
+    {
+        this.alive = alive;
+    }
+
+    public long getId()
+    {
+        return id;
     }
 }

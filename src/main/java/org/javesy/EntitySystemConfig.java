@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Encapsulates all configuration options for an entity system.
  */
-interface EntitySystemConfig
+public interface EntitySystemConfig
 {
     Set<Class<? extends Component>> getComponentClasses();
 

@@ -82,7 +82,8 @@ public class EntitySystemTest
         system.killEntity(c);
 
         assertThat(system.entities().contains(c), is(false));
-        assertThat(system.getComponentInternal(c, ComponentA.class), is(nullValue()));
+        int index = system.getTypeIndex(ComponentA.class);
+        assertThat(system.getComponentInternal(c, index), is(nullValue()));
 
         Set<Entity> entitiesWithAAfterRemoval = system.findEntitiesWithComponent(ComponentA.class);
         assertThat(entitiesWithAAfterRemoval.size(), is(1));
@@ -140,7 +141,7 @@ public class EntitySystemTest
 
     private Entity NOT_EXISTING_IN_SYSTEM = new Entity(42l);
     {
-        NOT_EXISTING_IN_SYSTEM.alive = false;
+        NOT_EXISTING_IN_SYSTEM.setAlive(false);
     }
 
     @Test(expected = AssertionError.class)

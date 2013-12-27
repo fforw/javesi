@@ -50,8 +50,12 @@ public final class EntitySystem
      */
     private final ConcurrentMap<Entity, Component> componentStore[];
 
+    private final Map<Entity,Component> componentStoreRO[];
+    private final Collection<Component> componentValuesRO[];
 
     private final SingletonComponentConnection[] singletonConnections;
+
+    private final Set<Entity> entitySetRO;
 
     /**
      * Maps entities to their names or <code>null</code>. primary tracker of existing entities.
@@ -75,8 +79,11 @@ public final class EntitySystem
         componentTypesInHashOrder = new Class[numberOfComponentTypes];
         componentStore = new ConcurrentMap[numberOfComponentTypes];
         singletonConnections = new SingletonComponentConnection[numberOfComponentTypes];
+        componentStoreRO = new Map[numberOfComponentTypes];
+        componentValuesRO = new Collection[numberOfComponentTypes];
 
         entitiesToNames = new ConcurrentHashMap<Entity, String>(config.getInitialEntityCapacity());
+        entitySetRO = Collections.unmodifiableSet(entitiesToNames.keySet());
 
         Map<Integer,Class<? extends Component>> knownHashes = new HashMap<Integer,Class<? extends Component>>();
 
@@ -104,7 +111,13 @@ public final class EntitySystem
             // initialize map for non-singletons. also acts as signal later
             if (!SingletonComponent.class.isAssignableFrom(componentType))
             {
-                componentStore[i] = new ConcurrentHashMap<Entity, Component>(config.getInitialComponentCapacity());
+                ConcurrentHashMap<Entity, Component> newMap = new ConcurrentHashMap<Entity,
+                    Component>(config.getInitialComponentCapacity());
+                Map<Entity, Component> entityComponentMap = Collections.unmodifiableMap(newMap);
+
+                componentStore[i] = newMap;
+                componentStoreRO[i] = entityComponentMap;
+                componentValuesRO[i] = entityComponentMap.values();
             }
         }
     }
@@ -126,7 +139,7 @@ public final class EntitySystem
         assert entity.isAlive() : "Entity " + nameFor(entity) + " is dead.";
         assert name != null : "Entity " + entity + " not found.";
 
-        entity.alive = false;
+        entity.setAlive(false);
 
         for (int i=0; i < numberOfComponentTypes; i++)
         {
@@ -134,7 +147,7 @@ public final class EntitySystem
             if (map == null)
             {
                 SingletonComponentConnection connection = singletonConnections[i];
-                if (connection != null && connection.entity.id == entity.id )
+                if (connection != null && connection.entity.getId() == entity.getId() )
                 {
                     singletonConnections[i] = null;
                 }
@@ -156,7 +169,7 @@ public final class EntitySystem
         if (SingletonComponent.class.isAssignableFrom(componentType))
         {
             SingletonComponentConnection connection = singletonConnections[index];
-            if (connection.entity.id == entity.id)
+            if (connection.entity.getId() == entity.getId())
             {
                 singletonConnections[index] = null;
             }
@@ -172,20 +185,19 @@ public final class EntitySystem
         assert entity.isAlive() : "Entity " + nameFor(entity) + " is dead.";
         assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
-        return getComponentInternal(entity, componentType);
+        int index = getTypeIndex(componentType);
+        return getComponentInternal(entity, index);
     }
 
 
     // internal test method. Is allowed to require on non-existing entities to validate component removal.
-    <T extends Component> T getComponentInternal(Entity entity, Class<T> componentType)
+    <T extends Component> T getComponentInternal(Entity entity, int componentTypeIndex)
     {
-        int index = getTypeIndex(componentType);
-
-        if (SingletonComponent.class.isAssignableFrom(componentType))
+        ConcurrentMap<Entity, Component> map = componentStore[componentTypeIndex];
+        if (map == null)
         {
-            SingletonComponentConnection connection = singletonConnections[index];
-
-            if (connection != null && connection.entity.id == entity.id)
+            SingletonComponentConnection connection = singletonConnections[componentTypeIndex];
+            if (connection != null && connection.entity.getId() == entity.getId())
             {
                 return (T) connection.component;
             }
@@ -194,7 +206,7 @@ public final class EntitySystem
         }
         else
         {
-            return (T) componentStore[index].get(entity);
+            return (T) map.get(entity);
         }
     }
 
@@ -271,7 +283,23 @@ public final class EntitySystem
         }
         else
         {
-            return (Collection<T>) componentStore[index].values();
+            return (Collection<T>) componentValuesRO[index];
+        }
+    }
+
+
+    public <T extends Component> Map<Entity,T> getEntityToComponentMap(
+        Class<T> componentType)
+    {
+        int index = getTypeIndex(componentType);
+
+        if (SingletonComponent.class.isAssignableFrom(componentType))
+        {
+            throw new UnsupportedOperationException("Singletons not supported in getEntityToComponentMap");
+        }
+        else
+        {
+            return (Map<Entity,T>) componentStoreRO[index];
         }
     }
 
@@ -357,12 +385,13 @@ public final class EntitySystem
 
     public String nameFor(Entity entity)
     {
+        // no assert since its used by other assert error reporting
         return entitiesToNames.get(entity);
     }
 
     public Set<Entity> entities()
     {
-        return Collections.unmodifiableSet(entitiesToNames.keySet());
+        return entitySetRO;
     }
 
     private Entity createAndRegisterEntity(String name)
