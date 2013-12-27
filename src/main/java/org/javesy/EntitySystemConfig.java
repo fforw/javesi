@@ -1,8 +1,13 @@
 package org.javesy;
 
+import org.javesy.id.EntityIdGenerator;
+
 import java.util.Set;
 
-public interface EntitySystemConfig
+/**
+ * Encapsulates all configuration options for an entity system.
+ */
+interface EntitySystemConfig
 {
     Set<Class<? extends Component>> getComponentClasses();
 

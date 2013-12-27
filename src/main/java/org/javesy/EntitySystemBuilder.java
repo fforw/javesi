@@ -1,8 +1,14 @@
 package org.javesy;
 
+import org.javesy.exception.JavesyRuntimeException;
+import org.javesy.id.DefaultIdGenerator;
+import org.javesy.id.EntityIdGenerator;
+
+import java.util.HashSet;
 import java.util.Set;
 
-public class SystemBuilder implements EntitySystemConfig
+public class EntitySystemBuilder
+    implements EntitySystemConfig
 {
     private Set<Class<? extends Component>> componentClasses;
 
@@ -12,7 +18,7 @@ public class SystemBuilder implements EntitySystemConfig
 
     private int initialComponentCapacity = 5000;
 
-    public SystemBuilder()
+    public EntitySystemBuilder()
     {
         idGenerator = new DefaultIdGenerator();
     }
@@ -25,20 +31,20 @@ public class SystemBuilder implements EntitySystemConfig
 
     //// WITHER METHODS ////////////////////////////
 
-    public SystemBuilder withIdGenerator(EntityIdGenerator idGenerator)
+    public EntitySystemBuilder withIdGenerator(EntityIdGenerator idGenerator)
     {
         this.idGenerator = idGenerator;
         return this;
     }
 
-    public SystemBuilder withInitialComponentCapacity(int initialComponentCapacity)
+    public EntitySystemBuilder withInitialComponentCapacity(int initialComponentCapacity)
     {
         this.initialComponentCapacity = initialComponentCapacity;
 
         return this;
     }
 
-    public SystemBuilder withInitialEntityCapacity(int initialEntityCapacity)
+    public EntitySystemBuilder withInitialEntityCapacity(int initialEntityCapacity)
     {
         this.initialEntityCapacity = initialEntityCapacity;
         return this;
@@ -76,7 +82,12 @@ public class SystemBuilder implements EntitySystemConfig
             // the elusive cast to Object ---------------------------------------------------.
             //                                                                               v
             Object instance = reflectionsClass.getConstructor(Object[].class).newInstance((Object)new Object[]{ pkg });
-            return (Set<Class<? extends Component>>) reflectionsClass.getMethod("getSubTypesOf", Class.class ).invoke(instance, Component.class);
+
+
+            Set<Class<? extends Component>> set = new HashSet<Class<? extends Component>>();
+            set.addAll((Set<Class<? extends Component>>) reflectionsClass.getMethod("getSubTypesOf", Class.class ).invoke(instance, Component.class));
+            set.addAll((Set<Class<? extends Component>>) reflectionsClass.getMethod("getSubTypesOf", Class.class ).invoke(instance, SingletonComponent.class));
+            return set;
         }
         catch (Exception e)
         {

@@ -1,15 +1,13 @@
 package org.javesy;
 
-import java.io.Serializable;
 
 /**
- * Signal interface implemented by component instances. Should contain
- * only serializable data, no code.
+ * Signal interface implemented by component instances. Should contain data, no code.
  * <p>
- *     Use a system to change components.
+ *     Use a sub-system to change components and do stuff.
  * </p>
  */
-public interface Component extends Serializable
+public interface Component
 {
 
 }

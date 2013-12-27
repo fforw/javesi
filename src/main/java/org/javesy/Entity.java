@@ -16,7 +16,7 @@ public class Entity
 {
     public final long id;
 
-    Entity(Long id)
+    Entity(long id)
     {
         this.id = id;
     }

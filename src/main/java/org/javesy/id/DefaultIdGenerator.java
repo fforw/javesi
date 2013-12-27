@@ -1,4 +1,4 @@
-package org.javesy;
+package org.javesy.id;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -11,8 +11,8 @@ public class DefaultIdGenerator
     private AtomicLong entityCount = new AtomicLong(0);
 
     @Override
-    public Long getNextEntityId()
+    public long getNextEntityId()
     {
-        return Long.valueOf( entityCount.getAndIncrement());
+        return entityCount.getAndIncrement();
     }
 }

@@ -1,19 +1,35 @@
 package org.javesy;
 
+import org.javesy.exception.ComponentHashNotUniqueException;
+import org.javesy.id.EntityIdGenerator;
+import org.javesy.util.HashOrderComparator;
+
+import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Encapsulates an entity system with a fixed number of known components.
+ * Encapsulates an entity system with a fixed number of known components. The entity system encompasses the knowledge
+ * about the identities of all game objects in an entity system / world.
+ * <p>
+ *     There is a fixed set of possible components that encapsulate all the data to represent a certain aspect of that
+ *     game object. Entities can be assigned as many components as necessary.
+ * </p>
+ * <p>
+ *     The actual work should be done in a {@link org.javesy.subsystem.SubSystemService} or in your own sub service
+ *     infrastructure.
+ * </p>
  */
 public final class EntitySystem
 {
@@ -21,7 +37,15 @@ public final class EntitySystem
 
     private final static String UNNAMED = "[no name]";
 
-    private Class[] componentTypesInHashOrder;
+    private Class<? extends Component>[] componentTypesInHashOrder;
+
+    /**
+     * Id generator to be used for this system. Can be changed by calling {@link #setEntityName(Entity, String)} before
+     * adding any entities.
+     */
+    private final EntityIdGenerator idGenerator;
+
+    private final int numberOfComponentTypes;
 
     /**
      * Array of Maps. Index is the index position in componentTypesInHashOrder, the maps map
@@ -29,70 +53,62 @@ public final class EntitySystem
      */
     private ConcurrentMap<Entity, Component> componentStore[];
 
+
+    private SingletonComponentConnection[] singletonComponents;
+
     /**
      * Maps entities to their names or <code>null</code>. primary tracker of existing entities.
      */
     private ConcurrentMap<Entity, String> entitiesToNames;
 
-    /**
-     * Id generator to be used for this system. Can be changed by calling {@link #setEntityName(Entity, String)} before
-     * adding any entities.
-     */
-    private EntityIdGenerator idGenerator;
 
     /**
      * Constructs a new entity system from a set of component classes with the additional restriction that the
      * hash codes of all classes must be unique.
      *
-     * @throws ComponentHashNotUniqueException if there are non-unique hash codes
+     * @throws org.javesy.exception.ComponentHashNotUniqueException if there are non-unique hash codes
      */
     public EntitySystem(EntitySystemConfig config)
     {
-        try
+        this.idGenerator = config.getIdGenerator();
+
+        Set<Class<? extends Component>> componentClasses = config.getComponentClasses();
+        numberOfComponentTypes = componentClasses.size();
+
+        componentTypesInHashOrder = new Class[numberOfComponentTypes];
+        componentStore = new ConcurrentMap[numberOfComponentTypes];
+        singletonComponents = new SingletonComponentConnection[numberOfComponentTypes];
+
+        entitiesToNames = new ConcurrentHashMap<Entity, String>(config.getInitialEntityCapacity());
+
+        Map<Integer,Class<? extends Component>> knownHashes = new HashMap<Integer,Class<? extends Component>>();
+
+        int index = 0;
+        for (Class<? extends Component> componentClass : componentClasses)
         {
-            this.idGenerator = config.getIdGenerator();
+            int componentHash = componentClass.hashCode();
 
-            Set<Class<? extends Component>> componentClasses = config.getComponentClasses();
-            final int numberOfTypes = componentClasses.size();
-
-            componentTypesInHashOrder = new Class[numberOfTypes];
-            componentStore = new ConcurrentMap[numberOfTypes];
-
-            entitiesToNames = new ConcurrentHashMap<Entity, String>(config.getInitialEntityCapacity());
-
-            Map<Integer,Class<? extends Component>> knownHashes = new HashMap<Integer,Class<? extends Component>>();
-
-            int index = 0;
-            for (Class<? extends Component> componentClass : componentClasses)
+            Class<? extends Component> otherComponentClass = knownHashes.get(componentHash);
+            if (otherComponentClass != null)
             {
-                int componentHash = componentClass.hashCode();
-
-                Class<? extends Component> otherComponentClass = knownHashes.get(componentHash);
-
-                if (otherComponentClass != null)
-                {
-                    throw new ComponentHashNotUniqueException("The component " + componentClass + " and " + otherComponentClass + " have the same hashCode. " +
-                        "This unfortunately violates one of our requirements. I'm afraid I have to ask you to change *something* on these classes.");
-                }
-
-                Component instance = componentClass.newInstance();
-                componentTypesInHashOrder[index] = componentClass;
-                componentStore[index] = new ConcurrentHashMap<Entity, Component>(config.getInitialComponentCapacity());
-
-                knownHashes.put(componentHash, componentClass);
-
-                index++;
+                throw new ComponentHashNotUniqueException("The component " + componentClass + " and " + otherComponentClass + " have the same hashCode. " +
+                    "This unfortunately violates one of our requirements. I'm afraid I have to ask you to change *something* on these classes.");
             }
+            componentTypesInHashOrder[index++] = componentClass;
+            knownHashes.put(componentHash, componentClass);
+        }
 
-            Arrays.sort(componentTypesInHashOrder, HashOrderComparator.INSTANCE);
-        }
-        catch (InstantiationException e)
+        Arrays.sort(componentTypesInHashOrder, HashOrderComparator.INSTANCE);
+
+        for (int i=0; i < numberOfComponentTypes ; i++)
         {
-            throw new JavesyRuntimeException(e);
-        }
-        catch (IllegalAccessException e)
-        {
-            throw new JavesyRuntimeException(e);
+            Class<? extends Component> componentType = componentTypesInHashOrder[i];
+
+            // initialize map for non-singletons. also acts as signal later
+            if (!SingletonComponent.class.isAssignableFrom(componentType))
+            {
+                componentStore[i] = new ConcurrentHashMap<Entity, Component>(config.getInitialComponentCapacity());
+            }
         }
     }
 
@@ -113,28 +129,49 @@ public final class EntitySystem
 
         assert name != null : "Entity " + entity + " not found.";
 
-        for (Map<Entity, ? extends Component> componentMap : componentStore)
+        for (int i=0; i < numberOfComponentTypes; i++)
         {
-            componentMap.remove(entity);
+            ConcurrentMap<Entity, Component> map = componentStore[i];
+            if (map == null)
+            {
+                SingletonComponentConnection connection = singletonComponents[i];
+                if (connection.entity.id == entity.id )
+                {
+                    singletonComponents[i] = null;
+                }
+            }
+            else
+            {
+                map.remove(entity);
+            }
         }
-
     }
 
-    public <T extends Component> void removeComponent(Entity entity, Class<T> cls)
+    public <T extends Component> void removeComponent(Entity entity, Class<T> componentType)
     {
         assert entitiesToNames.containsKey(entity): "Entity " + entity + " not found.";
 
-        int index = getTypeIndex(cls);
-        componentStore[index].remove(entity);
+        int index = getTypeIndex(componentType);
+
+        if (SingletonComponent.class.isAssignableFrom(componentType))
+        {
+            SingletonComponentConnection connection = singletonComponents[index];
+            if (connection.entity.id == entity.id)
+            {
+                singletonComponents[index] = null;
+            }
+        }
+        else
+        {
+            componentStore[index].remove(entity);
+        }
     }
 
     public <T extends Component> T getComponent(Entity entity, Class<T> componentType)
     {
-
         assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
-        int index = getTypeIndex(componentType);
-        return (T) componentStore[index].get(entity);
+        return getComponentInternal(entity, componentType);
     }
 
 
@@ -142,9 +179,23 @@ public final class EntitySystem
     <T extends Component> T getComponentInternal(Entity entity, Class<T> componentType)
     {
         int index = getTypeIndex(componentType);
-        return (T) componentStore[index].get(entity);
-    }
 
+        if (SingletonComponent.class.isAssignableFrom(componentType))
+        {
+            SingletonComponentConnection connection = singletonComponents[index];
+
+            if (connection != null && connection.entity.id == entity.id)
+            {
+                return (T) connection.component;
+            }
+
+            return (T) null;
+        }
+        else
+        {
+            return (T) componentStore[index].get(entity);
+        }
+    }
 
     public void setEntityName(Entity entity, String name)
     {
@@ -178,11 +229,22 @@ public final class EntitySystem
     {
         assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
-        List<Component> components = new ArrayList<Component>(componentStore.length);
+        List<Component> components = new ArrayList<Component>(numberOfComponentTypes);
 
-        for (ConcurrentMap<Entity, ? extends Component> map : componentStore)
+        for (int i=0; i < numberOfComponentTypes; i++)
         {
-            Component c = map.get(entity);
+            ConcurrentMap<Entity, ? extends Component> map = componentStore[i];
+            // a null signals it never got initialized because it's a SingleComponent
+            Component c;
+            if (map == null)
+            {
+                c = singletonComponents[i].component;
+            }
+            else
+            {
+                c = map.get(entity);
+            }
+
             if (c != null)
             {
                 components.add(c);
@@ -197,14 +259,31 @@ public final class EntitySystem
         Class<T> componentType)
     {
         int index = getTypeIndex(componentType);
-        return (Collection<T>) componentStore[index].values();
+
+        if (SingletonComponent.class.isAssignableFrom(componentType))
+        {
+            SingletonComponentConnection connection = singletonComponents[index];
+            return (Collection<T>) (connection != null ? connection.components() : Collections.emptyList());
+        }
+        else
+        {
+            return (Collection<T>) componentStore[index].values();
+        }
     }
 
     public <T extends Component> Set<Entity> findEntitiesWithComponent(
         Class<T> componentType)
     {
         int index = getTypeIndex(componentType);
-        return (Set<Entity>) componentStore[index].keySet();
+        if (SingletonComponent.class.isAssignableFrom(componentType))
+        {
+            SingletonComponentConnection connection = singletonComponents[index];
+            return (Set<Entity>) (connection != null ? connection.entities() : Collections.emptySet());
+        }
+        else
+        {
+            return (Set<Entity>) componentStore[index].keySet();
+        }
     }
 
     public Set<Entity> findEntitiesWithComponents(
@@ -219,8 +298,7 @@ public final class EntitySystem
         Set<Entity> matchedAll = null;
         for (Class componentType : componentTypes)
         {
-            int index = getTypeIndex(componentType);
-            Set<Entity> entitiesForComponent = (Set<Entity>) componentStore[index].keySet();
+            Set<Entity> entitiesForComponent = findEntitiesWithComponent(componentType);
             if (matchedAll == null)
             {
                 matchedAll = new HashSet<Entity>(entitiesForComponent);
@@ -237,8 +315,17 @@ public final class EntitySystem
     {
         assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
-        int index = getTypeIndex(component.getClass());
-        componentStore[index].put(entity, component);
+        Class<? extends Component> componentType = component.getClass();
+        int index = getTypeIndex(componentType);
+
+        if (SingletonComponent.class.isAssignableFrom(componentType))
+        {
+            singletonComponents[index] = new SingletonComponentConnection((SingletonComponent)component, entity);
+        }
+        else
+        {
+            componentStore[index].put(entity, component);
+        }
     }
 
     public Entity createEntity()
@@ -275,21 +362,5 @@ public final class EntitySystem
         Entity entity = new Entity( idGenerator.getNextEntityId() );
         entitiesToNames.put(entity, name);
         return entity;
-    }
-
-    /**
-     * Registers an alternate id generator for use with this entity system.
-     *
-     * @param idGenerator
-     */
-
-    public void setIdGenerator(EntityIdGenerator idGenerator)
-    {
-        if (entitiesToNames.size() > 0)
-        {
-            throw new IllegalStateException("Can't change id generator with existing entities.");
-        }
-
-        this.idGenerator = idGenerator;
     }
 }

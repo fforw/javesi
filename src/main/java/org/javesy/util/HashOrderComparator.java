@@ -1,11 +1,10 @@
-package org.javesy;
+package org.javesy.util;
 
 import java.util.Comparator;
-
-class HashOrderComparator implements Comparator
+public final class HashOrderComparator implements Comparator
 {
 
-    final static HashOrderComparator INSTANCE = new HashOrderComparator();
+    public final static HashOrderComparator INSTANCE = new HashOrderComparator();
 
     private HashOrderComparator()
     {

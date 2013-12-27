@@ -66,7 +66,7 @@
 
         <!--
             For us, reflections is just a test dependency.
-            If you want to use SystemBuilder.buildFromPackage, you need to depend on reflections yourself or provide
+            If you want to use EntitySystemBuilder.buildFromPackage, you need to depend on reflections yourself or provide
             it yourself if you do not use maven.
         -->
         <dependency>

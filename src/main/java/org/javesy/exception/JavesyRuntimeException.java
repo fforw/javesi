@@ -1,4 +1,4 @@
-package org.javesy;
+package org.javesy.exception;
 
 
 public class JavesyRuntimeException
@@ -18,4 +18,5 @@ public class JavesyRuntimeException
     {
         super(t);
     }
+
 }
