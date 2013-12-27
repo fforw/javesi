@@ -34,6 +34,6 @@ public class Entity
     @Override
     public int hashCode()
     {
-        return (int)((id >> 32) ^ (id & 0xffffffffL));
+        return (int)(id ^ (id >> 32));
     }
 }
