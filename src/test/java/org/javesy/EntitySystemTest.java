@@ -21,9 +21,9 @@ public class EntitySystemTest
 
         assertThat(system.entities().size(), is(0));
 
-        int a = system.createNamedEntity("Entity A");
-        int b = system.createNamedEntity("Entity B");
-        int c = system.createNamedEntity("Entity C");
+        Entity a = system.createNamedEntity("Entity A");
+        Entity b = system.createNamedEntity("Entity B");
+        Entity c = system.createNamedEntity("Entity C");
 
         assertThat(system.entities().size(), is(3));
 
@@ -59,16 +59,16 @@ public class EntitySystemTest
         Collection<ComponentC> compCs = system.getAllComponentsOfType(ComponentC.class);
         assertThat(compCs.size(), is(0));
 
-        Set<Integer> entitiesWithB = system.findEntitiesWithComponent(ComponentB.class);
+        Set<Entity> entitiesWithB = system.findEntitiesWithComponent(ComponentB.class);
         assertThat(entitiesWithB.size(),is(1));
         assertThat(entitiesWithB.contains(a),is(true));
 
-        Set<Integer> entitiesWithA = system.findEntitiesWithComponent(ComponentA.class);
+        Set<Entity> entitiesWithA = system.findEntitiesWithComponent(ComponentA.class);
         assertThat(entitiesWithA.size(),is(2));
         assertThat(entitiesWithA.contains(a),is(true));
         assertThat(entitiesWithA.contains(c),is(true));
 
-        Set<Integer> entitiesWithAandB = system.findEntitiesWithComponents(ComponentA.class, ComponentB.class);
+        Set<Entity> entitiesWithAandB = system.findEntitiesWithComponents(ComponentA.class, ComponentB.class);
         assertThat(entitiesWithB.size(),is(1));
         assertThat(entitiesWithB.contains(a),is(true));
 
@@ -79,9 +79,9 @@ public class EntitySystemTest
 
         // kill entity
 
-        Set<Integer> componentsWithAAfterRemoval = system.findEntitiesWithComponent(ComponentA.class);
-        assertThat(componentsWithAAfterRemoval.size(), is(1));
-        assertThat(componentsWithAAfterRemoval.contains(a), is(true));
+        Set<Entity> entitiesWithAAfterRemoval = system.findEntitiesWithComponent(ComponentA.class);
+        assertThat(entitiesWithAAfterRemoval.size(), is(1));
+        assertThat(entitiesWithAAfterRemoval.contains(a), is(true));
 
         // remove component
         assertThat(system.hasComponent(a, ComponentB.class), is(true));
@@ -121,45 +121,47 @@ public class EntitySystemTest
         return new ComponentC();
     }
 
-    @Test(expected =  EntityNotFoundException.class)
+    private Entity NOT_EXISTING_IN_SYSTEM = new Entity(42l);
+
+    @Test(expected =  AssertionError.class)
     public void thatInvalidKillsAreDetected()
     {
-        createTestSystem().killEntity(42);
+        createTestSystem().killEntity(NOT_EXISTING_IN_SYSTEM);
     }
 
-    @Test(expected =  EntityNotFoundException.class)
+    @Test(expected =  AssertionError.class)
     public void thatInvalidGetNameIsDetected()
     {
-        createTestSystem().nameFor(42);
+        createTestSystem().nameFor(NOT_EXISTING_IN_SYSTEM);
     }
     
-    @Test(expected =  EntityNotFoundException.class)
+    @Test(expected =  AssertionError.class)
     public void thatInvalidComponentRemovesAreDetected()
     {
-        createTestSystem().removeComponent(42, ComponentA.class);
+        createTestSystem().removeComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
     }
 
-    @Test(expected =  EntityNotFoundException.class)
+    @Test(expected =  AssertionError.class)
     public void thatInvalidHasComponentIsDetected()
     {
-        createTestSystem().hasComponent(42, ComponentA.class);
+        createTestSystem().hasComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
     }
 
-    @Test(expected =  EntityNotFoundException.class)
+    @Test(expected =  AssertionError.class)
     public void thatInvalidGetComponentIsDetected()
     {
-        createTestSystem().getComponent(42, ComponentA.class);
+        createTestSystem().getComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
     }
 
-    @Test(expected =  EntityNotFoundException.class)
+    @Test(expected =  AssertionError.class)
     public void thatInvalidAddComponentIsDetected()
     {
-        createTestSystem().addComponent(42, new ComponentA());
+        createTestSystem().addComponent(NOT_EXISTING_IN_SYSTEM, new ComponentA());
     }
 
-    @Test(expected =  EntityNotFoundException.class)
+    @Test(expected =  AssertionError.class)
     public void thatInvalidGetAllComponentsIsDetected()
     {
-        createTestSystem().getAllComponentsOnEntity(42);
+        createTestSystem().getAllComponentsOnEntity(NOT_EXISTING_IN_SYSTEM);
     }
 }

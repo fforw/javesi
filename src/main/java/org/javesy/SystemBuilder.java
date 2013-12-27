@@ -1,23 +1,29 @@
 package org.javesy;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
-public class SystemBuilder
+public class SystemBuilder implements EntitySystemConfig
 {
-    private EntityIdGenerator idGenerator = new DefaultIdGenerator();
+    private Set<Class<? extends Component>> componentClasses;
+
+    private EntityIdGenerator idGenerator;
 
     private int initialEntityCapacity = 10000;
 
+    private int initialComponentCapacity = 5000;
+
     public SystemBuilder()
     {
-
+        idGenerator = new DefaultIdGenerator();
     }
 
+    @Override
     public EntityIdGenerator getIdGenerator()
     {
         return idGenerator;
     }
+
+    //// WITHER METHODS ////////////////////////////
 
     public SystemBuilder withIdGenerator(EntityIdGenerator idGenerator)
     {
@@ -25,9 +31,11 @@ public class SystemBuilder
         return this;
     }
 
-    public int getInitialEntityCapacity()
+    public SystemBuilder withInitialComponentCapacity(int initialComponentCapacity)
     {
-        return initialEntityCapacity;
+        this.initialComponentCapacity = initialComponentCapacity;
+
+        return this;
     }
 
     public SystemBuilder withInitialEntityCapacity(int initialEntityCapacity)
@@ -36,26 +44,37 @@ public class SystemBuilder
         return this;
     }
 
-    public EntitySystem buildFromPackage(String pkg)
-    {
+    //// GETTER METHODS ////////////////////////////
 
-        try
-        {
-            Set<Class<? extends Component>> componentTypes = findComponentClasses(pkg);
-            return buildFromComponentClasses(componentTypes);
-        }
-        catch (Exception e)
-        {
-            throw new JavesyRuntimeException(e);
-        }
+    @Override
+    public int getInitialEntityCapacity()
+    {
+        return initialEntityCapacity;
     }
+
+    @Override
+    public int getInitialComponentCapacity()
+    {
+        return initialComponentCapacity;
+    }
+
+    @Override
+    public Set<Class<? extends Component>> getComponentClasses()
+    {
+        return componentClasses;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
 
     Set<Class<? extends Component>> findComponentClasses(String pkg)
     {
-        // doing this the funny reflexive way keeps the reflections dependency optional.
         try
         {
+            // doing this the funny reflexive way keeps the reflections dependency optional.
             Class<?> reflectionsClass = Class.forName("org.reflections.Reflections");
+
+            // the elusive cast to Object ---------------------------------------------------.
+            //                                                                               v
             Object instance = reflectionsClass.getConstructor(Object[].class).newInstance((Object)new Object[]{ pkg });
             return (Set<Class<? extends Component>>) reflectionsClass.getMethod("getSubTypesOf", Class.class ).invoke(instance, Component.class);
         }
@@ -65,8 +84,28 @@ public class SystemBuilder
         }
     }
 
+    //// BUILDER METHODS ////////////////////////////
+
+    public EntitySystem buildFromPackage(String pkg)
+    {
+
+        try
+        {
+            this.componentClasses = findComponentClasses(pkg);
+
+            return new EntitySystem(this);
+        }
+        catch (Exception e)
+        {
+            throw new JavesyRuntimeException(e);
+        }
+    }
+
+
     public EntitySystem buildFromComponentClasses(Set<Class<? extends Component>> pkg)
     {
-        return new EntitySystem(pkg, idGenerator, initialEntityCapacity);
+        this.componentClasses = pkg;
+
+        return new EntitySystem(this);
     }
 }

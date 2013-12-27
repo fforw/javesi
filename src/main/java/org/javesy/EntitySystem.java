@@ -17,7 +17,6 @@ import java.util.concurrent.ConcurrentMap;
  */
 public final class EntitySystem
 {
-    private static final int INIITAL_ENTITY_CAPACITY = 10000;
     private static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(EntitySystem.class);
 
     private final static String UNNAMED = "[no name]";
@@ -28,15 +27,15 @@ public final class EntitySystem
      * Array of Maps. Index is the index position in componentTypesInHashOrder, the maps map
      * all entities having that component type to the component of that type.
      */
-    private ConcurrentMap<Integer, Component> componentStore[];
+    private ConcurrentMap<Entity, Component> componentStore[];
 
     /**
      * Maps entities to their names or <code>null</code>. primary tracker of existing entities.
      */
-    private ConcurrentMap<Integer, String> entitiesToNames;
+    private ConcurrentMap<Entity, String> entitiesToNames;
 
     /**
-     * Id generator to be used for this system. Can be changed by calling {@link #setEntityName(int, String)} before
+     * Id generator to be used for this system. Can be changed by calling {@link #setEntityName(Entity, String)} before
      * adding any entities.
      */
     private EntityIdGenerator idGenerator;
@@ -45,21 +44,21 @@ public final class EntitySystem
      * Constructs a new entity system from a set of component classes with the additional restriction that the
      * hash codes of all classes must be unique.
      *
-     * @param componentClasses
      * @throws ComponentHashNotUniqueException if there are non-unique hash codes
      */
-    EntitySystem(Set<Class<? extends Component>> componentClasses, EntityIdGenerator idGenerator, int initialCapacity)
+    public EntitySystem(EntitySystemConfig config)
     {
         try
         {
-            this.idGenerator = idGenerator;
+            this.idGenerator = config.getIdGenerator();
 
+            Set<Class<? extends Component>> componentClasses = config.getComponentClasses();
             final int numberOfTypes = componentClasses.size();
 
             componentTypesInHashOrder = new Class[numberOfTypes];
             componentStore = new ConcurrentMap[numberOfTypes];
 
-            entitiesToNames = new ConcurrentHashMap<Integer, String>(initialCapacity);
+            entitiesToNames = new ConcurrentHashMap<Entity, String>(config.getInitialEntityCapacity());
 
             Map<Integer,Class<? extends Component>> knownHashes = new HashMap<Integer,Class<? extends Component>>();
 
@@ -78,7 +77,7 @@ public final class EntitySystem
 
                 Component instance = componentClass.newInstance();
                 componentTypesInHashOrder[index] = componentClass;
-                componentStore[index] = new ConcurrentHashMap<Integer, Component>();
+                componentStore[index] = new ConcurrentHashMap<Entity, Component>(config.getInitialComponentCapacity());
 
                 knownHashes.put(componentHash, componentClass);
 
@@ -97,6 +96,7 @@ public final class EntitySystem
         }
     }
 
+
     public int getTypeIndex(Class<? extends Component> componentClass)
     {
         int index = Arrays.binarySearch(componentTypesInHashOrder, componentClass, HashOrderComparator.INSTANCE);
@@ -107,58 +107,46 @@ public final class EntitySystem
         return index;
     }
 
-    public void killEntity(int entity)
+    public void killEntity(Entity entity)
     {
-        final Integer entityObj = entity;
+        String name = entitiesToNames.remove(entity);
 
-        String name = entitiesToNames.remove(entityObj);
-        if (name == null)
-        {
-            throw new EntityNotFoundException("Entity " + entityObj + " not found.");
-        }
+        assert name != null : "Entity " + entity + " not found.";
 
-        for (Map<Integer, ? extends Component> componentMap : componentStore)
+        for (Map<Entity, ? extends Component> componentMap : componentStore)
         {
-            componentMap.remove(entityObj);
+            componentMap.remove(entity);
         }
 
     }
 
-    public <T extends Component> void removeComponent(int entity, Class<T> cls)
+    public <T extends Component> void removeComponent(Entity entity, Class<T> cls)
     {
-        final Integer entityObj = entity;
-
-        if (!entitiesToNames.containsKey(entityObj))
-        {
-            throw new EntityNotFoundException("Entity " + entityObj + " not found.");
-        }
+        assert entitiesToNames.containsKey(entity): "Entity " + entity + " not found.";
 
         int index = getTypeIndex(cls);
-        componentStore[index].remove(entityObj);
+        componentStore[index].remove(entity);
     }
 
-    public <T extends Component> T getComponent(int entity, Class<T> componentType)
+    public <T extends Component> T getComponent(Entity entity, Class<T> componentType)
     {
-        final Integer entityObj = entity;
-        if (!entitiesToNames.containsKey(entityObj))
-        {
-            throw new EntityNotFoundException("Entity " + entityObj + " not found.");
-        }
+
+        assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
         int index = getTypeIndex(componentType);
-        return (T) componentStore[index].get(entityObj);
+        return (T) componentStore[index].get(entity);
     }
 
 
     // internal test method. Is allowed to require on non-existing entities to validate component removal.
-    <T extends Component> T getComponentInternal(int entity, Class<T> componentType)
+    <T extends Component> T getComponentInternal(Entity entity, Class<T> componentType)
     {
         int index = getTypeIndex(componentType);
         return (T) componentStore[index].get(entity);
     }
 
 
-    public void setEntityName(int entity, String name)
+    public void setEntityName(Entity entity, String name)
     {
         if (name == null)
         {
@@ -168,13 +156,10 @@ public final class EntitySystem
         String oldName = entitiesToNames.replace(entity, name);
 
         // there are no null names in our map, so a null means "No entity" here.
-        if (oldName == null)
-        {
-            throw new EntityNotFoundException("Entity " + entity + " does not exist.");
-        }
+        assert oldName != null :"Entity " + entity + " does not exist.";
     }
 
-    public <T extends Component> boolean hasComponent(int entity,
+    public <T extends Component> boolean hasComponent(Entity entity,
                                                       Class<T> componentType)
     {
         return getComponent(entity, componentType) != null;
@@ -189,20 +174,15 @@ public final class EntitySystem
      * @param entity
      * @return
      */
-    public List<? extends Component> getAllComponentsOnEntity(int entity)
+    public List<? extends Component> getAllComponentsOnEntity(Entity entity)
     {
-        final Integer entityObj = entity;
-
-        if (!entitiesToNames.containsKey(entityObj))
-        {
-            throw new EntityNotFoundException("Entity " + entityObj + " not found.");
-        }
+        assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
         List<Component> components = new ArrayList<Component>(componentStore.length);
 
-        for (ConcurrentMap<Integer, ? extends Component> map : componentStore)
+        for (ConcurrentMap<Entity, ? extends Component> map : componentStore)
         {
-            Component c = map.get(entityObj);
+            Component c = map.get(entity);
             if (c != null)
             {
                 components.add(c);
@@ -220,14 +200,14 @@ public final class EntitySystem
         return (Collection<T>) componentStore[index].values();
     }
 
-    public <T extends Component> Set<Integer> findEntitiesWithComponent(
+    public <T extends Component> Set<Entity> findEntitiesWithComponent(
         Class<T> componentType)
     {
         int index = getTypeIndex(componentType);
-        return (Set<Integer>) componentStore[index].keySet();
+        return (Set<Entity>) componentStore[index].keySet();
     }
 
-    public Set<Integer> findEntitiesWithComponents(
+    public Set<Entity> findEntitiesWithComponents(
         Class<? extends Component>... componentTypes)
     {
 
@@ -236,14 +216,14 @@ public final class EntitySystem
             return entities();
         }
 
-        Set<Integer> matchedAll = null;
+        Set<Entity> matchedAll = null;
         for (Class componentType : componentTypes)
         {
             int index = getTypeIndex(componentType);
-            Set<Integer> entitiesForComponent = (Set<Integer>) componentStore[index].keySet();
+            Set<Entity> entitiesForComponent = (Set<Entity>) componentStore[index].keySet();
             if (matchedAll == null)
             {
-                matchedAll = new HashSet<Integer>(entitiesForComponent);
+                matchedAll = new HashSet<Entity>(entitiesForComponent);
             }
             else
             {
@@ -253,24 +233,20 @@ public final class EntitySystem
         return matchedAll;
     }
 
-    public <T extends Component> void addComponent(int entity, T component)
+    public <T extends Component> void addComponent(Entity entity, T component)
     {
-        final Integer entityObj = entity;
-        if (!entitiesToNames.containsKey(entityObj))
-        {
-            throw new EntityNotFoundException("Entity " + entityObj + " not found.");
-        }
+        assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
         int index = getTypeIndex(component.getClass());
-        componentStore[index].put(entityObj, component);
+        componentStore[index].put(entity, component);
     }
 
-    public int createEntity()
+    public Entity createEntity()
     {
         return createAndRegisterEntity(UNNAMED);
     }
 
-    public int createNamedEntity(String name)
+    public Entity createNamedEntity(String name)
     {
         if (name == null)
         {
@@ -280,26 +256,23 @@ public final class EntitySystem
         return createAndRegisterEntity(name);
     }
 
-    public String nameFor(int entity)
+    public String nameFor(Entity entity)
     {
         String name = entitiesToNames.get(entity);
 
-        if (name == null)
-        {
-            throw new EntityNotFoundException("Entity" + entity + "does not exist");
-        }
+        assert name != null : "Entity" + entity + "does not exist";
 
         return name;
     }
 
-    public Set<Integer> entities()
+    public Set<Entity> entities()
     {
         return Collections.unmodifiableSet(entitiesToNames.keySet());
     }
 
-    private int createAndRegisterEntity(String name)
+    private Entity createAndRegisterEntity(String name)
     {
-        int entity = idGenerator.getNextEntityId();
+        Entity entity = new Entity( idGenerator.getNextEntityId() );
         entitiesToNames.put(entity, name);
         return entity;
     }
