@@ -48,15 +48,15 @@ public final class EntitySystem
      * Array of Maps. Index is the index position in componentTypesInHashOrder, the maps map
      * all entities having that component type to the component of that type.
      */
-    private ConcurrentMap<Entity, Component> componentStore[];
+    private final ConcurrentMap<Entity, Component> componentStore[];
 
 
-    private SingletonComponentConnection[] singletonConnections;
+    private final SingletonComponentConnection[] singletonConnections;
 
     /**
      * Maps entities to their names or <code>null</code>. primary tracker of existing entities.
      */
-    private ConcurrentMap<Entity, String> entitiesToNames;
+    private final ConcurrentMap<Entity, String> entitiesToNames;
 
 
     /**
@@ -123,8 +123,10 @@ public final class EntitySystem
     public void killEntity(Entity entity)
     {
         String name = entitiesToNames.remove(entity);
-
+        assert entity.isAlive() : "Entity " + nameFor(entity) + " is dead.";
         assert name != null : "Entity " + entity + " not found.";
+
+        entity.alive = false;
 
         for (int i=0; i < numberOfComponentTypes; i++)
         {
@@ -132,7 +134,7 @@ public final class EntitySystem
             if (map == null)
             {
                 SingletonComponentConnection connection = singletonConnections[i];
-                if (connection.entity.id == entity.id )
+                if (connection != null && connection.entity.id == entity.id )
                 {
                     singletonConnections[i] = null;
                 }
@@ -146,6 +148,7 @@ public final class EntitySystem
 
     public <T extends Component> void removeComponent(Entity entity, Class<T> componentType)
     {
+        assert entity.isAlive() : "Entity " + nameFor(entity) + " is dead.";
         assert entitiesToNames.containsKey(entity): "Entity " + entity + " not found.";
 
         int index = getTypeIndex(componentType);
@@ -166,6 +169,7 @@ public final class EntitySystem
 
     public <T extends Component> T getComponent(Entity entity, Class<T> componentType)
     {
+        assert entity.isAlive() : "Entity " + nameFor(entity) + " is dead.";
         assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
         return getComponentInternal(entity, componentType);
@@ -196,6 +200,7 @@ public final class EntitySystem
 
     public void setEntityName(Entity entity, String name)
     {
+        assert entity.isAlive() : "Entity " + nameFor(entity) + " is dead.";
         if (name == null)
         {
             name = UNNAMED;
@@ -224,6 +229,7 @@ public final class EntitySystem
      */
     public List<? extends Component> getAllComponentsOnEntity(Entity entity)
     {
+        assert entity.isAlive() : "Entity " + nameFor(entity) + " is dead.";
         assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
         List<Component> components = new ArrayList<Component>(numberOfComponentTypes);
@@ -235,7 +241,8 @@ public final class EntitySystem
             Component c;
             if (map == null)
             {
-                c = singletonConnections[i].component;
+                SingletonComponentConnection connection = singletonConnections[i];
+                c = connection != null ? connection.component : null;
             }
             else
             {
@@ -266,6 +273,13 @@ public final class EntitySystem
         {
             return (Collection<T>) componentStore[index].values();
         }
+    }
+
+    public <T extends SingletonComponent> Entity findEntityWithSingletonComponent(Class<T> componentType)
+    {
+        int index = getTypeIndex(componentType);
+        SingletonComponentConnection connection = singletonConnections[index];
+        return (Entity) (connection != null ? connection.entity : null);
     }
 
     public <T extends Component> Set<Entity> findEntitiesWithComponent(
@@ -310,6 +324,7 @@ public final class EntitySystem
 
     public <T extends Component> void addComponent(Entity entity, T component)
     {
+        assert entity.isAlive() : "Entity " + nameFor(entity) + " is dead.";
         assert entitiesToNames.containsKey(entity) : "Entity " + entity + " not found.";
 
         Class<? extends Component> componentType = component.getClass();
@@ -342,11 +357,7 @@ public final class EntitySystem
 
     public String nameFor(Entity entity)
     {
-        String name = entitiesToNames.get(entity);
-
-        assert name != null : "Entity" + entity + "does not exist";
-
-        return name;
+        return entitiesToNames.get(entity);
     }
 
     public Set<Entity> entities()

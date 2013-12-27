@@ -1,8 +1,7 @@
 package org.javesy;
 
-import java.util.AbstractSet;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import org.javesy.util.SingletonSet;
+
 import java.util.Set;
 
 /**
@@ -14,90 +13,40 @@ class SingletonComponentConnection
     public final SingletonComponent component;
     public final Entity entity;
 
-    private ComponentSetView componentSet;
-    private EntitySetView entitySet = new EntitySetView();
+    private SingletonSet<Component> componentSet;
+    private SingletonSet<Entity> entitySet;
 
     public SingletonComponentConnection(SingletonComponent component, Entity entity)
     {
+        assert entity != null : "Entity can't be null";
+        assert component != null : "Component can't be null";
+
         this.component = component;
         this.entity = entity;
     }
 
     public Set<Component> components()
     {
-        ComponentSetView set = componentSet;
+        SingletonSet<Component> set = componentSet;
 
         if (set == null)
         {
-            set = new ComponentSetView();
+            set = new SingletonSet<Component>(this.component);
             componentSet = set;
         }
-
         return set;
     }
 
     public Set<Entity> entities()
     {
-        return entitySet;
-    }
+        SingletonSet<Entity> set = entitySet;
 
-    private class ComponentSetView extends AbstractSetView<Component>
-    {
-        public Component getItem()
+        if (set == null)
         {
-            return component;
-        }
-    }
-
-    private class EntitySetView extends AbstractSetView<Entity>
-    {
-        public Entity getItem()
-        {
-            return entity;
-        }
-    }
-
-    private static abstract class AbstractSetView<T> extends AbstractSet<T>
-    {
-
-        abstract T getItem();
-
-        @Override
-        public Iterator<T> iterator()
-        {
-            return new Iterator<T>()
-            {
-                private boolean next = true;
-
-                @Override
-                public boolean hasNext()
-                {
-                    return next;
-                }
-
-                @Override
-                public T next()
-                {
-                    if (next)
-                    {
-                        next = false;
-                        return getItem();
-                    }
-                    throw new NoSuchElementException();
-                }
-
-                @Override
-                public void remove()
-                {
-                    throw new UnsupportedOperationException();
-                }
-            };
+            set = new SingletonSet<Entity>(this.entity);
+            entitySet = set;
         }
 
-        @Override
-        public int size()
-        {
-            return 1;
-        }
+        return set;
     }
 }

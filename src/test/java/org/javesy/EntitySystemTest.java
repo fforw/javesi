@@ -4,6 +4,8 @@ import org.javesy.testcomponents.ComponentA;
 import org.javesy.testcomponents.SingleB;
 import org.javesy.testcomponents.ComponentC;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
@@ -14,6 +16,8 @@ import java.util.Set;
 
 public class EntitySystemTest
 {
+    private static Logger log = LoggerFactory.getLogger(EntitySystemTest.class);
+
     @Test
     public void testEntitySystem()
     {
@@ -33,16 +37,16 @@ public class EntitySystemTest
 
         system.addComponent(c, createA("foo"));
 
-        assertThat(system.hasComponent(a,ComponentA.class), is(true));
-        assertThat(system.hasComponent(a,SingleB.class), is(true));
-        assertThat(system.hasComponent(a,ComponentC.class), is(false));
+        assertThat(system.hasComponent(a, ComponentA.class), is(true));
+        assertThat(system.hasComponent(a, SingleB.class), is(true));
+        assertThat(system.hasComponent(a, ComponentC.class), is(false));
 
-        assertThat(system.hasComponent(b,ComponentA.class), is(false));
-        assertThat(system.hasComponent(b,SingleB.class), is(false));
-        assertThat(system.hasComponent(b,ComponentC.class), is(false));
+        assertThat(system.hasComponent(b, ComponentA.class), is(false));
+        assertThat(system.hasComponent(b, SingleB.class), is(false));
+        assertThat(system.hasComponent(b, ComponentC.class), is(false));
 
-        assertThat(system.hasComponent(c,ComponentA.class), is(true));
-        assertThat(system.hasComponent(c,SingleB.class), is(false));
+        assertThat(system.hasComponent(c, ComponentA.class), is(true));
+        assertThat(system.hasComponent(c, SingleB.class), is(false));
         assertThat(system.hasComponent(c, ComponentC.class), is(false));
 
         // check name
@@ -62,22 +66,22 @@ public class EntitySystemTest
         assertThat(compCs.size(), is(0));
 
         Set<Entity> entitiesWithB = system.findEntitiesWithComponent(SingleB.class);
-        assertThat(entitiesWithB.size(),is(1));
-        assertThat(entitiesWithB.contains(a),is(true));
+        assertThat(entitiesWithB.size(), is(1));
+        assertThat(entitiesWithB.contains(a), is(true));
 
         Set<Entity> entitiesWithA = system.findEntitiesWithComponent(ComponentA.class);
-        assertThat(entitiesWithA.size(),is(2));
-        assertThat(entitiesWithA.contains(a),is(true));
-        assertThat(entitiesWithA.contains(c),is(true));
+        assertThat(entitiesWithA.size(), is(2));
+        assertThat(entitiesWithA.contains(a), is(true));
+        assertThat(entitiesWithA.contains(c), is(true));
 
         Set<Entity> entitiesWithAandB = system.findEntitiesWithComponents(ComponentA.class, SingleB.class);
-        assertThat(entitiesWithB.size(),is(1));
-        assertThat(entitiesWithB.contains(a),is(true));
+        assertThat(entitiesWithB.size(), is(1));
+        assertThat(entitiesWithB.contains(a), is(true));
 
         // kill entity
         system.killEntity(c);
 
-        assertThat(system.entities().contains(c), is(false) );
+        assertThat(system.entities().contains(c), is(false));
         assertThat(system.getComponentInternal(c, ComponentA.class), is(nullValue()));
 
         Set<Entity> entitiesWithAAfterRemoval = system.findEntitiesWithComponent(ComponentA.class);
@@ -85,7 +89,7 @@ public class EntitySystemTest
         assertThat(entitiesWithAAfterRemoval.contains(a), is(true));
 
         // add component c
-        system.addComponent(b,new ComponentC());
+        system.addComponent(b, new ComponentC());
         assertThat(system.hasComponent(b, ComponentC.class), is(true));
 
         // remove component c
@@ -94,13 +98,13 @@ public class EntitySystemTest
 
         // move singleton to D
         assertThat(system.hasComponent(a, SingleB.class), is(true));
-        system.addComponent(d,createB(12));
+        system.addComponent(d, createB(12));
         assertThat(system.hasComponent(d, SingleB.class), is(true));
         assertThat(system.hasComponent(a, SingleB.class), is(false));
 
         entitiesWithB = system.findEntitiesWithComponent(SingleB.class);
-        assertThat(entitiesWithB.size(),is(1));
-        assertThat(entitiesWithB.contains(d),is(true));
+        assertThat(entitiesWithB.size(), is(1));
+        assertThat(entitiesWithB.contains(d), is(true));
 
     }
 
@@ -135,46 +139,85 @@ public class EntitySystemTest
     }
 
     private Entity NOT_EXISTING_IN_SYSTEM = new Entity(42l);
+    {
+        NOT_EXISTING_IN_SYSTEM.alive = false;
+    }
 
-    @Test(expected =  AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void thatInvalidKillsAreDetected()
     {
-        createTestSystem().killEntity(NOT_EXISTING_IN_SYSTEM);
+        try
+        {
+            createTestSystem().killEntity(NOT_EXISTING_IN_SYSTEM);
+        }
+        catch (Exception e)
+        {
+            log.error("error killing entity", e);
+        }
     }
 
-    @Test(expected =  AssertionError.class)
-    public void thatInvalidGetNameIsDetected()
-    {
-        createTestSystem().nameFor(NOT_EXISTING_IN_SYSTEM);
-    }
-    
-    @Test(expected =  AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void thatInvalidComponentRemovesAreDetected()
     {
-        createTestSystem().removeComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
+        try
+        {
+            createTestSystem().removeComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
+        }
+        catch (Exception e)
+        {
+            log.error("error removing component", e);
+        }
     }
 
-    @Test(expected =  AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void thatInvalidHasComponentIsDetected()
     {
-        createTestSystem().hasComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
+        try
+        {
+            createTestSystem().hasComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
+        }
+        catch (Exception e)
+        {
+            log.error("error checking component", e);
+        }
     }
 
-    @Test(expected =  AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void thatInvalidGetComponentIsDetected()
     {
-        createTestSystem().getComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
+        try
+        {
+            createTestSystem().getComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
+        }
+        catch (Exception e)
+        {
+            log.error("error getting component", e);
+        }
     }
 
-    @Test(expected =  AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void thatInvalidAddComponentIsDetected()
     {
-        createTestSystem().addComponent(NOT_EXISTING_IN_SYSTEM, new ComponentA());
+        try
+        {
+            createTestSystem().addComponent(NOT_EXISTING_IN_SYSTEM, new ComponentA());
+        }
+        catch (Exception e)
+        {
+            log.error("error adding component ", e);
+        }
     }
 
-    @Test(expected =  AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void thatInvalidGetAllComponentsIsDetected()
     {
-        createTestSystem().getAllComponentsOnEntity(NOT_EXISTING_IN_SYSTEM);
+        try
+        {
+            createTestSystem().getAllComponentsOnEntity(NOT_EXISTING_IN_SYSTEM);
+        }
+        catch (Exception e)
+        {
+            log.error("error getting all components from entity", e);
+        }
     }
 }

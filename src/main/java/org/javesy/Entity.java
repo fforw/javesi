@@ -16,9 +16,12 @@ public class Entity
 {
     public final long id;
 
+    boolean alive;
+
     Entity(long id)
     {
         this.id = id;
+        alive = true;
     }
 
     @Override
@@ -26,7 +29,8 @@ public class Entity
     {
         if (obj instanceof Entity)
         {
-            return id == ((Entity)obj).id;
+            Entity that = (Entity) obj;
+            return id == that.id;
         }
         return false;
     }
@@ -34,6 +38,17 @@ public class Entity
     @Override
     public int hashCode()
     {
-        return (int)(id ^ (id >> 32));
+        return (int) (id ^ (id >> 32));
+    }
+
+    /**
+     * Returns <code>true</code> as long as this entity has not been killed from its
+     * entity system.
+     *
+     * @return
+     */
+    public boolean isAlive()
+    {
+        return alive;
     }
 }
