@@ -89,13 +89,5 @@
             <version>0.9.9-RC1</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.javesi</groupId>
-            <artifactId>javesi-test</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 </project>

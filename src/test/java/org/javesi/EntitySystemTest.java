@@ -238,17 +238,13 @@ public class EntitySystemTest
         }
     }
 
+    @Rule
+    public TestEntitySystem unknownTestSystem = new TestEntitySystem(ComponentA.class, SingleB.class);
+
     @Test(expected = InvalidComponentTypeException.class)
     public void thatUnknownComponentClassesAreDetected()
     {
-        Set<Class<? extends Component>> set = new HashSet<Class<? extends Component>>();
-        set.add(ComponentA.class);
-        new EntitySystemBuilder().withComponentClasses(set).build().execute(new Job()
-        {
-            public void execute(EntitySystem state)
-            {
-                state.addComponent(state.createEntity(), new ComponentC());
-            }
-        });
+        EntitySystem state = unknownTestSystem.getEntitySystem();
+        state.addComponent(state.createEntity(), new ComponentC());
     }
 }

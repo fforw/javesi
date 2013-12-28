@@ -5,5 +5,5 @@ package org.javesi;
  */
 public interface Job
 {
-    void execute(EntitySystem state);
+    void execute(EntitySystem state) throws Exception;
 }

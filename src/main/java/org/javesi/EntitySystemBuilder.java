@@ -134,6 +134,7 @@ public class EntitySystemBuilder
         return componentClasses;
     }
 
+
     ///////////////////////////////////////////////////////////////////////
 
     Set<Class<? extends Component>> findComponentClasses(String pkg)

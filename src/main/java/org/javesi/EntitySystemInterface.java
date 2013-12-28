@@ -1,5 +1,8 @@
 package org.javesi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Offers a method to execute {@link Job}s on your entity system.
  * <p>
@@ -16,6 +19,9 @@ public final class EntitySystemInterface
 
     private final Object worldLock;
 
+    private static Logger log = LoggerFactory.getLogger(EntitySystemInterface.class);
+
+
     EntitySystemInterface(EntitySystem system)
     {
         this.system = system;
@@ -26,7 +32,7 @@ public final class EntitySystemInterface
      * Executes the given job while obtaining a lock on the given entity system.
      * @param job
      */
-    public void execute(Job job)
+    public void execute(Job job) throws Exception
     {
         synchronized (worldLock)
         {
