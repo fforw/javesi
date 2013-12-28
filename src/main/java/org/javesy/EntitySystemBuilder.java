@@ -14,9 +14,19 @@ public class EntitySystemBuilder
 
     private EntityIdGenerator idGenerator;
 
-    private int initialEntityCapacity = 10000;
+    /** default entity map capacity */
+    private int entityMapCapacity = 10000;
+    /** default entity map load factor */
+    private float entityMapLoadFactor = 0.75f;
+    /** default entity map concurrency level */
+    private int entityMapConcurrencyLevel = 16;
 
-    private int initialComponentCapacity = 5000;
+    /** default component map capacity */
+    private int componentMapCapacity = 5000;
+    /** default component map load factor */
+    private float componentMapLoadFactor = 0.75f;
+    /** default component map concurrency level */
+    private int componentMapConcurrencyLevel = 16;
 
     public EntitySystemBuilder()
     {
@@ -31,37 +41,91 @@ public class EntitySystemBuilder
 
     //// WITHER METHODS ////////////////////////////
 
+    public EntitySystemBuilder withComponentClasses(Set<Class<? extends Component>> componentClasses)
+    {
+        this.componentClasses = componentClasses;
+        return this;
+    }
+
     public EntitySystemBuilder withIdGenerator(EntityIdGenerator idGenerator)
     {
         this.idGenerator = idGenerator;
         return this;
     }
 
-    public EntitySystemBuilder withInitialComponentCapacity(int initialComponentCapacity)
+    public EntitySystemBuilder withEntityMapCapacity(int entityMapCapacity)
     {
-        this.initialComponentCapacity = initialComponentCapacity;
-
+        this.entityMapCapacity = entityMapCapacity;
         return this;
     }
 
-    public EntitySystemBuilder withInitialEntityCapacity(int initialEntityCapacity)
+    public EntitySystemBuilder withComponentMapCapacity(int componentMapCapacity)
     {
-        this.initialEntityCapacity = initialEntityCapacity;
+        this.componentMapCapacity = componentMapCapacity;
         return this;
     }
+
+    public EntitySystemBuilder withEntityMapLoadFactor(float entityMapLoadFactor)
+    {
+        this.entityMapLoadFactor = entityMapLoadFactor;
+        return this;
+    }
+
+    public EntitySystemBuilder withEntityMapConcurrencyLevel(int entityMapConcurrencyLevel)
+    {
+        this.entityMapConcurrencyLevel = entityMapConcurrencyLevel;
+        return this;
+    }
+
+    public EntitySystemBuilder withComponentMapConcurrencyLevel(int componentMapConcurrencyLevel)
+    {
+        this.componentMapConcurrencyLevel = componentMapConcurrencyLevel;
+        return this;
+    }
+
+    public EntitySystemBuilder withComponentMapLoadFactor(float componentMapLoadFactor)
+    {
+        this.componentMapLoadFactor = componentMapLoadFactor;
+        return this;
+    }
+
 
     //// GETTER METHODS ////////////////////////////
 
     @Override
-    public int getInitialEntityCapacity()
+    public int getComponentMapCapacity()
     {
-        return initialEntityCapacity;
+        return componentMapCapacity;
     }
 
     @Override
-    public int getInitialComponentCapacity()
+    public float getComponentMapLoadFactor()
     {
-        return initialComponentCapacity;
+        return componentMapLoadFactor;
+    }
+
+    @Override
+    public int getComponentMapConcurrencyLevel()
+    {
+        return componentMapConcurrencyLevel;
+    }
+
+    @Override
+    public int getEntityMapConcurrencyLevel()
+    {
+        return entityMapConcurrencyLevel;
+    }
+
+    @Override
+    public float getEntityMapLoadFactor()
+    {
+        return entityMapLoadFactor;
+    }
+
+    @Override
+    public int getEntityMapCapacity()
+    {
+        return entityMapCapacity;
     }
 
     @Override

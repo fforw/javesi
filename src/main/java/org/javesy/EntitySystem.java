@@ -82,12 +82,11 @@ public final class EntitySystem
         componentStoreRO = new Map[numberOfComponentTypes];
         componentValuesRO = new Collection[numberOfComponentTypes];
 
-        entitiesToNames = new ConcurrentHashMap<Entity, String>(config.getInitialEntityCapacity());
+        entitiesToNames = new ConcurrentHashMap<Entity, String>(config.getEntityMapCapacity(), config.getEntityMapLoadFactor(), config.getEntityMapConcurrencyLevel());;
         entitySetRO = Collections.unmodifiableSet(entitiesToNames.keySet());
 
-        componentTypesInHashOrder = getSortedComponentClasses(componentClasses);
+        componentTypesInHashOrder = getSortedComponentTypes(componentClasses);
 
-        Arrays.sort(componentTypesInHashOrder, HashOrderComparator.INSTANCE);
 
         for (int i=0; i < numberOfComponentTypes ; i++)
         {
@@ -97,17 +96,18 @@ public final class EntitySystem
             if (!SingletonComponent.class.isAssignableFrom(componentType))
             {
                 ConcurrentHashMap<Entity, Component> newMap = new ConcurrentHashMap<Entity,
-                    Component>(config.getInitialComponentCapacity());
-                Map<Entity, Component> entityComponentMap = Collections.unmodifiableMap(newMap);
-
+                    Component>(config.getComponentMapCapacity(), config.getComponentMapLoadFactor(), config.getComponentMapConcurrencyLevel());
                 componentStore[i] = newMap;
+
+                Map<Entity, Component> entityComponentMap = Collections.unmodifiableMap(newMap);
                 componentStoreRO[i] = entityComponentMap;
-                componentValuesRO[i] = entityComponentMap.values();
+                componentValuesRO[i] = Collections.unmodifiableCollection(newMap.values());
             }
         }
     }
 
-    private Class<? extends Component>[] getSortedComponentClasses(Set<Class<? extends Component>> componentClasses)
+    private Class<? extends Component>[] getSortedComponentTypes(
+        Set<Class<? extends Component>> componentClasses)
     {
         Map<Integer,Class<? extends Component>> knownHashes = new HashMap<Integer,Class<? extends Component>>();
         Class<? extends Component>[] componentTypesInHashOrder = new Class[numberOfComponentTypes];
@@ -126,9 +126,10 @@ public final class EntitySystem
             knownHashes.put(componentHash, componentClass);
         }
 
+        Arrays.sort(componentTypesInHashOrder, HashOrderComparator.INSTANCE);
+
         return componentTypesInHashOrder;
     }
-
 
 
     public int getTypeIndex(Class<? extends Component> componentClass)

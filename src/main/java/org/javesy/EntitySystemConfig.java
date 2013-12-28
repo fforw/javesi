@@ -13,7 +13,14 @@ public interface EntitySystemConfig
 
     EntityIdGenerator getIdGenerator();
 
-    int getInitialEntityCapacity();
+    // entity map config
+    int getEntityMapCapacity();
+    float getEntityMapLoadFactor();
+    int getEntityMapConcurrencyLevel();
 
-    int getInitialComponentCapacity();
+    // config for each component map
+    int getComponentMapCapacity();
+    float getComponentMapLoadFactor();
+    int getComponentMapConcurrencyLevel();
+
 }

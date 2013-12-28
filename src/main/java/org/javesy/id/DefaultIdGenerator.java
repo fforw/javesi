@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Generates new identities on base of an atomic long.
  */
-public class DefaultIdGenerator
+public final class DefaultIdGenerator
     implements EntityIdGenerator
 {
     /**

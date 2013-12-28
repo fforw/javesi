@@ -4,18 +4,13 @@ import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SingletonSet<T> extends AbstractSet<T>
+public final class SingletonSet<T> extends AbstractSet<T>
 {
-    protected final T value;
+    private final T value;
 
     public SingletonSet(T value)
     {
         this.value = value;
-    }
-
-    public T getItem()
-    {
-        return value;
     }
 
     @Override
@@ -37,7 +32,7 @@ public class SingletonSet<T> extends AbstractSet<T>
                 if (next)
                 {
                     next = false;
-                    return getItem();
+                    return value;
                 }
                 throw new NoSuchElementException();
             }
@@ -48,6 +43,11 @@ public class SingletonSet<T> extends AbstractSet<T>
                 throw new UnsupportedOperationException();
             }
         };
+    }
+
+    public T getValue()
+    {
+        return value;
     }
 
     @Override

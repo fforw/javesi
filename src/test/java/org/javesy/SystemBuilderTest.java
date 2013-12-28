@@ -16,8 +16,8 @@ public class SystemBuilderTest
     @Test
     public void thatPackageScanningWorks()
     {
-        Set<Class<? extends Component>> componentClasses = new EntitySystemBuilder().findComponentClasses("org.javesy" +
-            ".testcomponents");
+        Set<Class<? extends Component>> componentClasses =
+            new EntitySystemBuilder().findComponentClasses("org.javesy.testcomponents");
 
         assertThat(componentClasses.size(), is(4));
         assertThat(componentClasses.contains(ComponentA.class), is(true));
