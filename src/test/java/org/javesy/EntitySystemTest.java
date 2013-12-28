@@ -129,7 +129,11 @@ public class EntitySystemTest
         set.add(ComponentC.class);
         set.add(UnusedSingle.class);
 
-        return new EntitySystemBuilder().buildFromComponentClasses(set);
+        return new EntitySystemBuilder()
+            .withEntityMapCapacity(16)
+            .withComponentMapCapacity(16)
+            .withComponentClasses(set)
+            .build();
     }
 
     private ComponentA createA(String value)
@@ -240,7 +244,7 @@ public class EntitySystemTest
     {
         Set<Class<? extends Component>> set = new HashSet<Class<? extends Component>>();
         set.add(ComponentA.class);
-        EntitySystem system = new EntitySystemBuilder().buildFromComponentClasses(set);
+        EntitySystem system = new EntitySystemBuilder().withComponentClasses(set).build();
 
         system.addComponent(system.createEntity(), new ComponentC());
     }

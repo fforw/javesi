@@ -7,6 +7,7 @@ import java.util.Set;
 /**
  * Immutable class to encapsulate the attribution of a singleton component to an entity.
  *
+ * Offers two set views on the component and entity via lazy initialized {@link SingletonSet] impl.
  */
 class SingletonComponentConnection
 {

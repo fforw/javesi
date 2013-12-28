@@ -4,10 +4,20 @@ import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Specialized set implementation with a single member value.
+ *
+ * @param <T> type of the one and only member of the set
+ */
 public final class SingletonSet<T> extends AbstractSet<T>
 {
     private final T value;
 
+    /**
+     * Constructs a new set for the given value.
+     *
+     * @param value
+     */
     public SingletonSet(T value)
     {
         this.value = value;
@@ -16,33 +26,7 @@ public final class SingletonSet<T> extends AbstractSet<T>
     @Override
     public Iterator<T> iterator()
     {
-        return new Iterator<T>()
-        {
-            private boolean next = true;
-
-            @Override
-            public boolean hasNext()
-            {
-                return next;
-            }
-
-            @Override
-            public T next()
-            {
-                if (next)
-                {
-                    next = false;
-                    return value;
-                }
-                throw new NoSuchElementException();
-            }
-
-            @Override
-            public void remove()
-            {
-                throw new UnsupportedOperationException();
-            }
-        };
+        return new SingletonSetIterator(value);
     }
 
     public T getValue()

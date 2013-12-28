@@ -159,16 +159,14 @@ public class EntitySystemBuilder
         }
     }
 
-    //// BUILDER METHODS ////////////////////////////
 
-    public EntitySystem buildFromPackage(String pkg)
+
+    public EntitySystemBuilder fromPackage(String pkg)
     {
-
         try
         {
             this.componentClasses = findComponentClasses(pkg);
-
-            return new EntitySystem(this);
+            return this;
         }
         catch (Exception e)
         {
@@ -177,10 +175,15 @@ public class EntitySystemBuilder
     }
 
 
-    public EntitySystem buildFromComponentClasses(Set<Class<? extends Component>> pkg)
+    public EntitySystem build()
     {
-        this.componentClasses = pkg;
-
         return new EntitySystem(this);
+    }
+
+    @Override
+    public final boolean equals(Object obj)
+    {
+        // testing relies on instance equality of builder
+        return super.equals(obj);
     }
 }
