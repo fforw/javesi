@@ -25,7 +25,6 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="javesi" />
-        <module name="javesi-test" />
         <module name="javesy" />
       </profile>
     </annotationProcessing>

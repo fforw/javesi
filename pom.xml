@@ -61,14 +61,15 @@
             </exclusions>
         </dependency>
 
-
-        <!-- TEST dependencies -->
+        <!-- Not as test dependency because we implement a test rule -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
+
+        <!-- TEST dependencies -->
 
         <dependency>
             <groupId>org.hamcrest</groupId>
