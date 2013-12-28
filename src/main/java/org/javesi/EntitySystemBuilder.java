@@ -161,7 +161,7 @@ public class EntitySystemBuilder
 
 
 
-    public EntitySystemBuilder fromPackage(String pkg)
+    public EntitySystemBuilder withComponentPackage(String pkg)
     {
         try
         {

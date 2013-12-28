@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>javesy</groupId>
-    <artifactId>javesy</artifactId>
+    <groupId>org.javesi</groupId>
+    <artifactId>javesi</artifactId>
     <version>0.3-SNAPSHOT</version>
 
     <build>
@@ -86,6 +86,13 @@
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>0.9.9-RC1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.javesi</groupId>
+            <artifactId>javesi-test</artifactId>
+            <version>1.0</version>
             <scope>test</scope>
         </dependency>
 

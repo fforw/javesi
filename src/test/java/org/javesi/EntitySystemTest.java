@@ -1,7 +1,7 @@
 package org.javesi;
 
 import org.javesi.exception.InvalidComponentTypeException;
-import org.javesi.test.EntitySystemRule;
+import org.javesi.test.TestEntitySystem;
 import org.javesi.testcomponents.ComponentA;
 import org.javesi.testcomponents.SingleB;
 import org.javesi.testcomponents.ComponentC;
@@ -22,10 +22,7 @@ public class EntitySystemTest
 {
     private static Logger log = LoggerFactory.getLogger(EntitySystemTest.class);
     @Rule
-    public EntitySystemRule rule = new EntitySystemRule(ComponentA.class, ComponentC.class, SingleB.class,
-        UnusedSingle.class);
-    @Rule
-    public EntitySystemRule common = new EntitySystemRule(ComponentA.class, ComponentC.class, SingleB.class,
+    public TestEntitySystem errorsSystem = new TestEntitySystem(ComponentA.class, ComponentC.class, SingleB.class,
         UnusedSingle.class);
     private Entity NOT_EXISTING_IN_SYSTEM = new Entity(42l);
 
@@ -33,10 +30,14 @@ public class EntitySystemTest
         NOT_EXISTING_IN_SYSTEM.setAlive(false);
     }
 
+    @Rule
+    public TestEntitySystem mainSystem = new TestEntitySystem(ComponentA.class, ComponentC.class, SingleB.class,
+        UnusedSingle.class);
+
     @Test
     public void testEntitySystem()
     {
-        EntitySystem system = rule.getEntitySystem();
+        EntitySystem system = mainSystem.getEntitySystem();
 
         assertThat(system.entities().size(), is(0));
 
@@ -158,7 +159,7 @@ public class EntitySystemTest
     {
         try
         {
-            EntitySystem state = common.getEntitySystem();
+            EntitySystem state = errorsSystem.getEntitySystem();
             state.killEntity(NOT_EXISTING_IN_SYSTEM);
         }
         catch (Exception e)
@@ -172,7 +173,7 @@ public class EntitySystemTest
     {
         try
         {
-            EntitySystem state = common.getEntitySystem();
+            EntitySystem state = errorsSystem.getEntitySystem();
             state.removeComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
         }
         catch (Exception e)
@@ -186,7 +187,7 @@ public class EntitySystemTest
     {
         try
         {
-            EntitySystem state = common.getEntitySystem();
+            EntitySystem state = errorsSystem.getEntitySystem();
             state.hasComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
         }
         catch (Exception e)
@@ -200,7 +201,7 @@ public class EntitySystemTest
     {
         try
         {
-            EntitySystem state = common.getEntitySystem();
+            EntitySystem state = errorsSystem.getEntitySystem();
             state.getComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
         }
         catch (Exception e)
@@ -214,7 +215,7 @@ public class EntitySystemTest
     {
         try
         {
-            EntitySystem state = common.getEntitySystem();
+            EntitySystem state = errorsSystem.getEntitySystem();
             state.addComponent(NOT_EXISTING_IN_SYSTEM, new ComponentA());
         }
         catch (Exception e)
@@ -228,7 +229,7 @@ public class EntitySystemTest
     {
         try
         {
-            EntitySystem state = common.getEntitySystem();
+            EntitySystem state = errorsSystem.getEntitySystem();
             state.getAllComponentsOnEntity(NOT_EXISTING_IN_SYSTEM);
         }
         catch (Exception e)
