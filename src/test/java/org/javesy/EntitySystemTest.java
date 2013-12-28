@@ -1,10 +1,12 @@
 package org.javesy;
 
 import org.javesy.exception.InvalidComponentTypeException;
+import org.javesy.test.EntitySystemRule;
 import org.javesy.testcomponents.ComponentA;
 import org.javesy.testcomponents.SingleB;
 import org.javesy.testcomponents.ComponentC;
 import org.javesy.testcomponents.UnusedSingle;
+import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +21,22 @@ import java.util.Set;
 public class EntitySystemTest
 {
     private static Logger log = LoggerFactory.getLogger(EntitySystemTest.class);
+    @Rule
+    public EntitySystemRule rule = new EntitySystemRule(ComponentA.class, ComponentC.class, SingleB.class,
+        UnusedSingle.class);
+    @Rule
+    public EntitySystemRule common = new EntitySystemRule(ComponentA.class, ComponentC.class, SingleB.class,
+        UnusedSingle.class);
+    private Entity NOT_EXISTING_IN_SYSTEM = new Entity(42l);
+
+    {
+        NOT_EXISTING_IN_SYSTEM.setAlive(false);
+    }
 
     @Test
     public void testEntitySystem()
     {
-        EntitySystem system = createTestSystem();
+        EntitySystem system = rule.getEntitySystem();
 
         assertThat(system.entities().size(), is(0));
 
@@ -121,21 +134,6 @@ public class EntitySystemTest
 
     }
 
-    private EntitySystem createTestSystem()
-    {
-        Set<Class<? extends Component>> set = new HashSet<Class<? extends Component>>();
-        set.add(ComponentA.class);
-        set.add(SingleB.class);
-        set.add(ComponentC.class);
-        set.add(UnusedSingle.class);
-
-        return new EntitySystemBuilder()
-            .withEntityMapCapacity(16)
-            .withComponentMapCapacity(16)
-            .withComponentClasses(set)
-            .build();
-    }
-
     private ComponentA createA(String value)
     {
         ComponentA componentA = new ComponentA();
@@ -150,15 +148,9 @@ public class EntitySystemTest
         return componentB;
     }
 
-
     private ComponentC createC()
     {
         return new ComponentC();
-    }
-
-    private Entity NOT_EXISTING_IN_SYSTEM = new Entity(42l);
-    {
-        NOT_EXISTING_IN_SYSTEM.setAlive(false);
     }
 
     @Test(expected = AssertionError.class)
@@ -166,7 +158,8 @@ public class EntitySystemTest
     {
         try
         {
-            createTestSystem().killEntity(NOT_EXISTING_IN_SYSTEM);
+            EntitySystem state = common.getEntitySystem();
+            state.killEntity(NOT_EXISTING_IN_SYSTEM);
         }
         catch (Exception e)
         {
@@ -179,7 +172,8 @@ public class EntitySystemTest
     {
         try
         {
-            createTestSystem().removeComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
+            EntitySystem state = common.getEntitySystem();
+            state.removeComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
         }
         catch (Exception e)
         {
@@ -192,7 +186,8 @@ public class EntitySystemTest
     {
         try
         {
-            createTestSystem().hasComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
+            EntitySystem state = common.getEntitySystem();
+            state.hasComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
         }
         catch (Exception e)
         {
@@ -205,7 +200,8 @@ public class EntitySystemTest
     {
         try
         {
-            createTestSystem().getComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
+            EntitySystem state = common.getEntitySystem();
+            state.getComponent(NOT_EXISTING_IN_SYSTEM, ComponentA.class);
         }
         catch (Exception e)
         {
@@ -218,7 +214,8 @@ public class EntitySystemTest
     {
         try
         {
-            createTestSystem().addComponent(NOT_EXISTING_IN_SYSTEM, new ComponentA());
+            EntitySystem state = common.getEntitySystem();
+            state.addComponent(NOT_EXISTING_IN_SYSTEM, new ComponentA());
         }
         catch (Exception e)
         {
@@ -231,7 +228,8 @@ public class EntitySystemTest
     {
         try
         {
-            createTestSystem().getAllComponentsOnEntity(NOT_EXISTING_IN_SYSTEM);
+            EntitySystem state = common.getEntitySystem();
+            state.getAllComponentsOnEntity(NOT_EXISTING_IN_SYSTEM);
         }
         catch (Exception e)
         {
@@ -244,8 +242,12 @@ public class EntitySystemTest
     {
         Set<Class<? extends Component>> set = new HashSet<Class<? extends Component>>();
         set.add(ComponentA.class);
-        EntitySystem system = new EntitySystemBuilder().withComponentClasses(set).build();
-
-        system.addComponent(system.createEntity(), new ComponentC());
+        new EntitySystemBuilder().withComponentClasses(set).build().execute(new Job()
+        {
+            public void execute(EntitySystem state)
+            {
+                state.addComponent(state.createEntity(), new ComponentC());
+            }
+        });
     }
 }

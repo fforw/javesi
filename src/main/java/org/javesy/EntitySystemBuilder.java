@@ -175,9 +175,9 @@ public class EntitySystemBuilder
     }
 
 
-    public EntitySystem build()
+    public EntitySystemInterface build()
     {
-        return new EntitySystem(this);
+        return new EntitySystem(this).getExecutor();
     }
 
     @Override

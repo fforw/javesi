@@ -401,4 +401,9 @@ public final class EntitySystem
         entitiesToNames.put(entity, name);
         return entity;
     }
+
+    EntitySystemInterface getExecutor()
+    {
+        return new EntitySystemInterface(this);
+    }
 }
