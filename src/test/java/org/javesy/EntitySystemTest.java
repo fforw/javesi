@@ -1,8 +1,10 @@
 package org.javesy;
 
+import org.javesy.exception.InvalidComponentTypeException;
 import org.javesy.testcomponents.ComponentA;
 import org.javesy.testcomponents.SingleB;
 import org.javesy.testcomponents.ComponentC;
+import org.javesy.testcomponents.UnusedSingle;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,6 +109,16 @@ public class EntitySystemTest
         assertThat(entitiesWithB.size(), is(1));
         assertThat(entitiesWithB.contains(d), is(true));
 
+        // removing an non-existing component executes but has no effect
+        assertThat(system.hasComponent(b, ComponentC.class), is(false));
+        system.removeComponent(b, ComponentC.class);
+        assertThat(system.hasComponent(b, ComponentC.class), is(false));
+
+        // removing an unused singleton component executes but has no effect
+        assertThat(system.hasComponent(a, UnusedSingle.class), is(false));
+        system.removeComponent(a, UnusedSingle.class);
+        assertThat(system.hasComponent(a, UnusedSingle.class), is(false));
+
     }
 
     private EntitySystem createTestSystem()
@@ -115,6 +127,7 @@ public class EntitySystemTest
         set.add(ComponentA.class);
         set.add(SingleB.class);
         set.add(ComponentC.class);
+        set.add(UnusedSingle.class);
 
         return new EntitySystemBuilder().buildFromComponentClasses(set);
     }
@@ -220,5 +233,15 @@ public class EntitySystemTest
         {
             log.error("error getting all components from entity", e);
         }
+    }
+
+    @Test(expected = InvalidComponentTypeException.class)
+    public void thatUnknownComponentClassesAreDetected()
+    {
+        Set<Class<? extends Component>> set = new HashSet<Class<? extends Component>>();
+        set.add(ComponentA.class);
+        EntitySystem system = new EntitySystemBuilder().buildFromComponentClasses(set);
+
+        system.addComponent(system.createEntity(), new ComponentC());
     }
 }

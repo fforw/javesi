@@ -1,6 +1,7 @@
 package org.javesy;
 
 import org.javesy.exception.ComponentHashNotUniqueException;
+import org.javesy.exception.InvalidComponentTypeException;
 import org.javesy.id.EntityIdGenerator;
 import org.javesy.util.HashOrderComparator;
 
@@ -76,7 +77,6 @@ public final class EntitySystem
         Set<Class<? extends Component>> componentClasses = config.getComponentClasses();
         numberOfComponentTypes = componentClasses.size();
 
-        componentTypesInHashOrder = new Class[numberOfComponentTypes];
         componentStore = new ConcurrentMap[numberOfComponentTypes];
         singletonConnections = new SingletonComponentConnection[numberOfComponentTypes];
         componentStoreRO = new Map[numberOfComponentTypes];
@@ -85,22 +85,7 @@ public final class EntitySystem
         entitiesToNames = new ConcurrentHashMap<Entity, String>(config.getInitialEntityCapacity());
         entitySetRO = Collections.unmodifiableSet(entitiesToNames.keySet());
 
-        Map<Integer,Class<? extends Component>> knownHashes = new HashMap<Integer,Class<? extends Component>>();
-
-        int index = 0;
-        for (Class<? extends Component> componentClass : componentClasses)
-        {
-            int componentHash = componentClass.hashCode();
-
-            Class<? extends Component> otherComponentClass = knownHashes.get(componentHash);
-            if (otherComponentClass != null)
-            {
-                throw new ComponentHashNotUniqueException("The component " + componentClass + " and " + otherComponentClass + " have the same hashCode. " +
-                    "This unfortunately violates one of our requirements. I'm afraid I have to ask you to change *something* on these classes.");
-            }
-            componentTypesInHashOrder[index++] = componentClass;
-            knownHashes.put(componentHash, componentClass);
-        }
+        componentTypesInHashOrder = getSortedComponentClasses(componentClasses);
 
         Arrays.sort(componentTypesInHashOrder, HashOrderComparator.INSTANCE);
 
@@ -122,13 +107,36 @@ public final class EntitySystem
         }
     }
 
+    private Class<? extends Component>[] getSortedComponentClasses(Set<Class<? extends Component>> componentClasses)
+    {
+        Map<Integer,Class<? extends Component>> knownHashes = new HashMap<Integer,Class<? extends Component>>();
+        Class<? extends Component>[] componentTypesInHashOrder = new Class[numberOfComponentTypes];
+        int index = 0;
+        for (Class<? extends Component> componentClass : componentClasses)
+        {
+            int componentHash = componentClass.hashCode();
+
+            Class<? extends Component> otherComponentClass = knownHashes.get(componentHash);
+            if (otherComponentClass != null)
+            {
+                throw new ComponentHashNotUniqueException("The component " + componentClass + " and " + otherComponentClass + " have the same hashCode. " +
+                    "This unfortunately violates one of our requirements. I'm afraid I have to ask you to change *something* on these classes.");
+            }
+            componentTypesInHashOrder[index++] = componentClass;
+            knownHashes.put(componentHash, componentClass);
+        }
+
+        return componentTypesInHashOrder;
+    }
+
+
 
     public int getTypeIndex(Class<? extends Component> componentClass)
     {
         int index = Arrays.binarySearch(componentTypesInHashOrder, componentClass, HashOrderComparator.INSTANCE);
         if (index < 0)
         {
-            throw new IllegalStateException(componentClass + " is not known by this system");
+            throw new InvalidComponentTypeException(componentClass + " is not known by this system");
         }
         return index;
     }
@@ -169,7 +177,7 @@ public final class EntitySystem
         if (SingletonComponent.class.isAssignableFrom(componentType))
         {
             SingletonComponentConnection connection = singletonConnections[index];
-            if (connection.entity.getId() == entity.getId())
+            if (connection != null && connection.entity.getId() == entity.getId())
             {
                 singletonConnections[index] = null;
             }
@@ -190,7 +198,10 @@ public final class EntitySystem
     }
 
 
-    // internal test method. Is allowed to require on non-existing entities to validate component removal.
+    /**
+     * Returns the component for the given entity should such a component exist. Internal
+     * method that does not validate entity identity or lifecycle.
+     */
     <T extends Component> T getComponentInternal(Entity entity, int componentTypeIndex)
     {
         ConcurrentMap<Entity, Component> map = componentStore[componentTypeIndex];
@@ -248,18 +259,7 @@ public final class EntitySystem
 
         for (int i=0; i < numberOfComponentTypes; i++)
         {
-            ConcurrentMap<Entity, ? extends Component> map = componentStore[i];
-            // a null signals it never got initialized because it's a SingleComponent
-            Component c;
-            if (map == null)
-            {
-                SingletonComponentConnection connection = singletonConnections[i];
-                c = connection != null ? connection.component : null;
-            }
-            else
-            {
-                c = map.get(entity);
-            }
+            Component c = getComponentInternal(entity, i);
 
             if (c != null)
             {
