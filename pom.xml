@@ -6,7 +6,7 @@
 
     <groupId>org.javesi</groupId>
     <artifactId>javesi</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.4-SNAPSHOT</version>
 
     <build>
         <plugins>

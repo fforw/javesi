@@ -18,7 +18,7 @@ class TestJob
     }
 
     @Override
-    public void execute(EntitySystem state)
+    public void execute(EntitySystem state) throws Exception
     {
         try
         {
