@@ -265,7 +265,6 @@ public final class EntitySystem
         }
     }
 
-
     /**
      * Returns the component for the given entity should such a component exist. Internal
      * method that does not validate entity identity or lifecycle.
@@ -387,15 +386,22 @@ public final class EntitySystem
         }
     }
 
-    public <T extends SingletonComponent> Entity findEntityWithSingleton(Class<T> componentType)
+    public Entity findEntityWithSingleton(Class<? extends SingletonComponent> componentType)
     {
         int index = getTypeIndex(componentType);
         SingletonComponentConnection connection = singletonConnections[index];
         return (Entity) (connection != null ? connection.entity : null);
     }
 
-    public <T extends Component> Set<Entity> findEntitiesWithComponent(
-        Class<T> componentType)
+    public <T extends SingletonComponent> T findSingletonComponent(Class<T> componentType)
+    {
+        int index = getTypeIndex(componentType);
+        SingletonComponentConnection connection = singletonConnections[index];
+        return (T) ( connection != null ?  connection.component : null);
+    }
+
+    public Set<Entity> findEntitiesWithComponent(
+        Class<? extends Component> componentType)
     {
         int index = getTypeIndex(componentType);
         if (SingletonComponent.class.isAssignableFrom(componentType))
