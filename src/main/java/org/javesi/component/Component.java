@@ -1,4 +1,4 @@
-package org.javesi;
+package org.javesi.component;
 
 
 /**

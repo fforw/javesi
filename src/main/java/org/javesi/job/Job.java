@@ -1,4 +1,6 @@
-package org.javesi;
+package org.javesi.job;
+
+import org.javesi.EntitySystem;
 
 /**
  * Implemented by code wanting to interact with an EntitySystem.
@@ -9,7 +11,7 @@ package org.javesi;
 public interface Job
 {
     /**
-     * Executes the job with the given input.
+     * Executes the org.javesi.job with the given input.
      * @param state
      * @throws Exception
      */

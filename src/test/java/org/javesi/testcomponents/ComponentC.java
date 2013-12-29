@@ -1,6 +1,6 @@
 package org.javesi.testcomponents;
 
-import org.javesi.Component;
+import org.javesi.component.Component;
 
 public class ComponentC
     implements Component

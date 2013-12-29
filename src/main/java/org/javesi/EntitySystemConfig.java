@@ -1,5 +1,6 @@
 package org.javesi;
 
+import org.javesi.component.Component;
 import org.javesi.id.EntityIdGenerator;
 
 import java.util.Set;

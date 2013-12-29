@@ -1,7 +1,7 @@
 package org.javesi.test;
 
 import org.javesi.EntitySystem;
-import org.javesi.Job;
+import org.javesi.job.Job;
 import org.javesi.exception.JavesyRuntimeException;
 import org.junit.runners.model.Statement;
 

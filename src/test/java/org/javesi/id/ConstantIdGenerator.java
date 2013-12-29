@@ -1,6 +1,4 @@
-package org.javesi;
-
-import org.javesi.id.EntityIdGenerator;
+package org.javesi.id;
 
 public class ConstantIdGenerator
     implements EntityIdGenerator

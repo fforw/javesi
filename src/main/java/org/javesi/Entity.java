@@ -16,6 +16,15 @@ public final class Entity
 {
     private final long id;
 
+    /** Mutable per entity flag to keep track of entity life time with just the entity reference.
+     * <p>
+     *     Not sure if I keep this. It seems the lesser evil compared to the idea of everyone having
+     *     to have their entity aliveness checked by system hash tables.
+     * </p>
+     * <p>
+     *     this is set by {@link EntitySystem#killEntity(Entity)}
+     * </p>
+     */
     private boolean alive;
 
     Entity(long id)

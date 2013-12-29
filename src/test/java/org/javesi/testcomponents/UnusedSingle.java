@@ -1,6 +1,6 @@
 package org.javesi.testcomponents;
 
-import org.javesi.SingletonComponent;
+import org.javesi.component.SingletonComponent;
 
 public class UnusedSingle
     implements SingletonComponent

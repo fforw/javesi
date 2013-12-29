@@ -1,6 +1,6 @@
 package org.javesi.test;
 
-import org.javesi.Component;
+import org.javesi.component.Component;
 import org.javesi.EntitySystem;
 import org.javesi.EntitySystemBuilder;
 import org.javesi.EntitySystemInterface;

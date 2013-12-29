@@ -1,5 +1,7 @@
 package org.javesi;
 
+import org.javesi.component.Component;
+import org.javesi.id.ConstantIdGenerator;
 import org.javesi.id.EntityIdGenerator;
 import org.javesi.testcomponents.ComponentA;
 import org.javesi.testcomponents.SingleB;

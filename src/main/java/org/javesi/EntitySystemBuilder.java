@@ -1,5 +1,7 @@
 package org.javesi;
 
+import org.javesi.component.Component;
+import org.javesi.component.SingletonComponent;
 import org.javesi.exception.JavesyRuntimeException;
 import org.javesi.id.DefaultIdGenerator;
 import org.javesi.id.EntityIdGenerator;
@@ -7,6 +9,10 @@ import org.javesi.id.EntityIdGenerator;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Entry class for javesi. Use a builder to receive an {@link EntitySystemInterface} which allows you to interact
+ * with the entity system via jobs.
+ */
 public class EntitySystemBuilder
     implements EntitySystemConfig
 {
@@ -178,7 +184,7 @@ public class EntitySystemBuilder
 
     public EntitySystemInterface build()
     {
-        return new EntitySystem(this).getExecutor();
+        return new EntitySystem(this).getInterface();
     }
 
     @Override
