@@ -396,14 +396,14 @@ public final class EntitySystem
         }
     }
 
-    public Entity findEntityWithSingleton(Class<? extends SingletonComponent> componentType)
+    public Entity getEntityWithSingleton(Class<? extends SingletonComponent> componentType)
     {
         int index = getTypeIndex(componentType);
         SingletonComponentConnection connection = singletonConnections[index];
         return (Entity) (connection != null ? connection.entity : null);
     }
 
-    public <T extends SingletonComponent> T findSingletonComponent(Class<T> componentType)
+    public <T extends SingletonComponent> T getSingletonComponent(Class<T> componentType)
     {
         int index = getTypeIndex(componentType);
         SingletonComponentConnection connection = singletonConnections[index];
