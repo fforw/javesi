@@ -133,6 +133,8 @@ public class EntitySystemTest
         system.removeComponent(a, UnusedSingle.class);
         assertThat(system.hasComponent(a, UnusedSingle.class), is(false));
 
+        System.out.println(system.getStatus());
+
     }
 
     private ComponentA createA(String value)

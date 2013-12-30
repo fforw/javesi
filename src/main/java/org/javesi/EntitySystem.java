@@ -123,7 +123,17 @@ public final class EntitySystem
         for (int i = 0; i < componentTypesInHashOrder.length ; i++)
         {
             Class<? extends Component> cls = componentTypesInHashOrder[i];
-            componentMapSizes.put(cls.getName(), componentStore[i].size());
+            ConcurrentMap<Entity, Component> map = componentStore[i];
+
+            if (map == null)
+            {
+                componentMapSizes.put(cls.getName(), singletonConnections[i] != null ? 1 : 0);
+            }
+            else
+            {
+                componentMapSizes.put(cls.getName(), map.size());
+            }
+
         }
 
         return new Status(entityMapSize, componentMapSizes);
@@ -521,16 +531,35 @@ public final class EntitySystem
             return created;
         }
 
+        private final static String COLUMN = "                                        ";
+
         @Override
         public String toString()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.append("Entity system status (created ");
-            sb.append(new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ").format(new Date(created)));
+            sb.append("-- Entity system status (created ");
+            sb.append(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(new Date(created)));
             sb.append("):").append(SEP);
-            sb.append("Entity map size : ").append(entityMapSize).append(SEP);
-            sb.append("Component map sizes : ").append(componentMapSizes).append(SEP);
+            sb.append("Entity map size : ").append(entityMapSize).append(", ");
+
+            sb.append("component map sizes :").append(SEP);
+            for (Map.Entry<String,Integer> e : componentMapSizes.entrySet())
+            {
+                String key = e.getKey();
+
+                if (key.length() > COLUMN.length())
+                {
+                    sb.append(key.substring(key.length() - COLUMN.length()));
+                }
+                else
+                {
+                    sb.append(key).append(COLUMN.substring(key.length()));
+                }
+
+
+                sb.append(" = ").append(e.getValue()).append(SEP);
+            }
 
             return sb.toString();
         }
