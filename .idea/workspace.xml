@@ -5,19 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a163176-7868-4c98-8ad3-290f834da2a4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemInterface.java" afterPath="$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/org/javesi/EntitySystemTest.java" afterPath="$PROJECT_DIR$/src/test/java/org/javesi/EntitySystemTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/javesi/Job.java" afterPath="$PROJECT_DIR$/src/main/java/org/javesi/Job.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javesi.iml" afterPath="$PROJECT_DIR$/javesi.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="javesy.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/AbstractEntitySystem.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388000755271" ignored="false" />
-    <file path="/Entity.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388176495339" ignored="false" />
-    <file path="/fragment.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388254861889" ignored="false" />
+    <file path="/Entity.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388330019418" ignored="false" />
+    <file path="/fragment.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388407866979" ignored="false" />
     <file path="/Component.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1387931465864" ignored="false" />
     <file path="/CustomStoreComponent.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1387866407096" ignored="false" />
     <file path="/JavesyRuntimeException.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1387866836021" ignored="false" />
@@ -25,16 +22,16 @@
     <file path="/ComponentClassesEntitySystem.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1387872638058" ignored="false" />
     <file path="/pom.xml" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388261872943" ignored="false" />
     <file path="/ComponentScanningEntitySystem.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1387870945100" ignored="false" />
-    <file path="/EntitySystemBuilder.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388264800852" ignored="false" />
-    <file path="/EntitySystem.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388181136356" ignored="false" />
+    <file path="/EntitySystemBuilder.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388404537732" ignored="false" />
+    <file path="/EntitySystem.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388405079960" ignored="false" />
     <file path="$PROJECT_DIR$/../cgame/Makefile" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1387924666191" ignored="false" />
     <file path="/EntityLink.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1387929444970" ignored="false" />
     <file path="/*.regexp" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388165197210" ignored="false" />
-    <file path="/EntitySystemTest.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388265250583" ignored="false" />
+    <file path="/EntitySystemTest.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388404631065" ignored="false" />
     <file path="/ComponentA.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388001027568" ignored="false" />
     <file path="/ComponentB.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388001037205" ignored="false" />
     <file path="/ComponentNotUniqueException.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388059208501" ignored="false" />
-    <file path="/Dummy.txt" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388264298832" ignored="false" />
+    <file path="/Dummy.txt" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388935590460" ignored="false" />
     <file path="/SubsystemService.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388061861905" ignored="false" />
     <file path="/EntityNotFoundException.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388063363006" ignored="false" />
     <file path="/EntityIdGenerator.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388164609190" ignored="false" />
@@ -49,7 +46,7 @@
     <file path="$PROJECT_DIR$/../shooter/src/main/java/org/javesy/shooter/components/Visual.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388172448875" ignored="false" />
     <file path="/Visual.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388172448471" ignored="false" />
     <file path="$PROJECT_DIR$/../shooter/src/main/java/org/javesy/shooter/Vector2D.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388172373063" ignored="false" />
-    <file path="/Vector2D.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388172364832" ignored="false" />
+    <file path="/Vector2D.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388408039521" ignored="false" />
     <file path="$PROJECT_DIR$/../shooter/src/main/java/org/javesy/shooter/GameRuntimeException.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388172184809" ignored="false" />
     <file path="/GameRuntimeException.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388172168520" ignored="false" />
     <file path="$PROJECT_DIR$/../shooter/src/main/java/org/javesy/shooter/math/Vector2D.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388172419184" ignored="false" />
@@ -58,10 +55,45 @@
     <file path="/EntitySetView.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388181737388" ignored="false" />
     <file path="/AbstractSingletonSet.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388182156341" ignored="false" />
     <file path="/TestEntitySystem.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388256239582" ignored="false" />
-    <file path="/TestJob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388256284210" ignored="false" />
-    <file path="/Job.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388264322798" ignored="false" />
-    <file path="/EntitySystemInterface.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388265002887" ignored="false" />
+    <file path="/TestJob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388326703901" ignored="false" />
+    <file path="/Job.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388327090971" ignored="false" />
+    <file path="/EntitySystemInterface.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388329751173" ignored="false" />
     <file path="/a.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388264634768" ignored="false" />
+    <file path="/shipanim.html" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388611013800" ignored="false" />
+    <file path="/package.html" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388329653109" ignored="false" />
+    <file path="/overview.html" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388329576855" ignored="false" />
+    <file path="/EntitySystemStatus.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388331303857" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/jobs/BehaviorJob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388408180857" ignored="false" />
+    <file path="/BehaviorJob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388408158876" ignored="false" />
+    <file path="$MAVEN_REPOSITORY$/org/javesi/javesi/0.4-SNAPSHOT/javesi-0.4-SNAPSHOT.jar!/org/javesi/EntitySystem.class" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388350465112" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/components/Predator.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388406961304" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/components/Prey.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388342400363" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/Game.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388337269698" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/jobs/RenderingJob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388407596265" ignored="false" />
+    <file path="/Game.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388337530482" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/components/Visual.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388342253565" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/Simulation.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388407959718" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/jobs/StartGameJob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388337621936" ignored="false" />
+    <file path="/StartGameJob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388337622445" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/jobs/InitializeSimulation.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388343529139" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/components/GameComponent.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388343461472" ignored="false" />
+    <file path="/GameComponent.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388339152436" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/math/Vector2D.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388408039521" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/components/Positioned.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388340764144" ignored="false" />
+    <file path="/Positioned.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388340761516" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/src/main/java/org/javesi/blobs/components/Blob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388342363542" ignored="false" />
+    <file path="/Blob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388342362774" ignored="false" />
+    <file path="/Prey.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388342391290" ignored="false" />
+    <file path="/Simulation.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388342563518" ignored="false" />
+    <file path="/InitializeSimulation.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388343357519" ignored="false" />
+    <file path="/var/www/test/behaviours.html" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388348415175" ignored="false" />
+    <file path="/behaviours.html" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388348409757" ignored="false" />
+    <file path="/Predator.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388406951160" ignored="false" />
+    <file path="/RenderingJob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388859344762" ignored="false" />
+    <file path="$PROJECT_DIR$/../javesi-blobs/pom.xml" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388407753647" ignored="false" />
+    <file path="/index.html" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388666147777" ignored="false" />
+    <file path="$PROJECT_DIR$/../phaser/.idea/workspace.xml" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388859358008" ignored="false" />
+    <file path="$PROJECT_DIR$/../phaser/src/main/java/org/javesi/phaser/jobs/RenderingJob.java" changelist="6a163176-7868-4c98-8ad3-290f834da2a4" time="1388859348395" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +108,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -112,7 +145,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -122,83 +154,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Entity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/Entity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="19" selection-start="523" selection-end="523" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="method#isAlive#0;class#Entity#0" expanded="false" />
-                <element signature="method#setAlive#0;class#Entity#0" expanded="false" />
-                <element signature="method#getId#0;class#Entity#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EntitySystemBuilder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="13" selection-start="3336" selection-end="3336" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#getIdGenerator#0;class#EntitySystemBuilder#0" expanded="false" />
-                <element signature="method#getComponentMapCapacity#0;class#EntitySystemBuilder#0" expanded="false" />
-                <element signature="method#getComponentMapLoadFactor#0;class#EntitySystemBuilder#0" expanded="false" />
-                <element signature="method#getComponentMapConcurrencyLevel#0;class#EntitySystemBuilder#0" expanded="false" />
-                <element signature="method#getEntityMapConcurrencyLevel#0;class#EntitySystemBuilder#0" expanded="false" />
-                <element signature="method#getEntityMapLoadFactor#0;class#EntitySystemBuilder#0" expanded="false" />
-                <element signature="method#getEntityMapCapacity#0;class#EntitySystemBuilder#0" expanded="false" />
-                <element signature="method#getComponentClasses#0;class#EntitySystemBuilder#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConstantIdGenerator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/ConstantIdGenerator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="13" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EntitySystemTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/javesi/EntitySystemTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="246" column="46" selection-start="8430" selection-end="8430" vertical-scroll-proportion="4.86631">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="EntitySystem.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/EntitySystem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="137" column="15" selection-start="5789" selection-end="5789" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestEntitySystem.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/test/TestEntitySystem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="13" selection-start="343" selection-end="343" vertical-scroll-proportion="0.0">
+            <state line="327" column="8" selection-start="11897" selection-end="11897" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntitySystemInterface.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemInterface.java">
+      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="32" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="30" column="0" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.5113636">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -221,22 +190,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/javesy/util/AbstractSingletonSet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/javesy/util/SingletonSet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/javesy/SingletonComponentConnection.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/javesi/SingletonComponentConnection.java" />
-        <option value="$PROJECT_DIR$/src/test/java/org/javesi/test/TestEntitySystem.java" />
-        <option value="$PROJECT_DIR$/../javesi-test/src/main/java/TestJob.java" />
-        <option value="$PROJECT_DIR$/../javesi-test/src/main/java/TestEntitySystem.java" />
-        <option value="$PROJECT_DIR$/../javesi-test/src/main/java/org/javesy/test/TestEntitySystem.java" />
-        <option value="$PROJECT_DIR$/../javesi-test/src/main/java/org/javesi/test/TestJob.java" />
-        <option value="$PROJECT_DIR$/../javesi-test/src/main/java/org/javesi/test/TestEntitySystem.java" />
-        <option value="$PROJECT_DIR$/../javesi-test/pom.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/org/javesi/Job.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/id/package.html" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/exception/package.html" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/component/package.html" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/test/package.html" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/util/package.html" />
+        <option value="$PROJECT_DIR$/src/main/java/overview.html" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/package.html" />
         <option value="$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemInterface.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/Entity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/status/EntitySystemStatus.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemBuilder.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/javesi/EntitySystemTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/javesi/EntitySystem.java" />
+        <option value="/var/www/test/shipanim.html" />
+        <option value="/var/www/test/shipanim/index.html" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -333,13 +302,97 @@
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javesy" />
+              <option name="myItemId" value="javesi" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javesy" />
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.7 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.7 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.7 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.7 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -349,7 +402,7 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javesy" />
+              <option name="myItemId" value="javesi" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -375,7 +428,7 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javesy" />
+              <option name="myItemId" value="javesi" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -384,66 +437,148 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javesy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javesi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javesi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javesy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javesi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javesi" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="id" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javesi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="status" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -452,7 +587,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/org/javesy" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit3" />
@@ -462,47 +597,55 @@
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="editor.preferences.folding" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="/var/www/test/shipanim/index.html" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="org.javesy" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.javesi.id" />
+      <recent name="org.javesi" />
       <recent name="org.javesy.util" />
       <recent name="org.javesy" />
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/org/javesi" />
-      <recent name="$PROJECT_DIR$/../javesi-test/src/main/java" />
-      <recent name="$PROJECT_DIR$/src/main/java/org/javesy" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/javesi/util" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/javesi/job" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/javesi/component" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/javesi/exception" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.javesi.status" />
       <recent name="org.javesy" />
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.javesi" />
+      <recent name="org.javesi.id" />
       <recent name="org.javesy.test" />
       <recent name="org.javesy.util" />
       <recent name="org.javesy.testcomponents" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.org.javesi in javesi">
+  <component name="RunManager" selected="JUnit.EntitySystemTest">
     <configuration default="false" name="EntitySystemTest.testEntitySystem" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="javesy" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -532,16 +675,16 @@
       <method />
     </configuration>
     <configuration default="false" name="EntitySystemTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="javesy" />
+      <module name="javesi" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="org.javesi" />
       <option name="MAIN_CLASS_NAME" value="org.javesi.EntitySystemTest" />
-      <option name="METHOD_NAME" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -645,6 +788,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -672,19 +828,6 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
@@ -697,6 +840,13 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -728,8 +878,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.org.javesi in javesi" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.EntitySystemTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.EntitySystemTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.org.javesi in javesi" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.EntitySystemTest.thatInvalidKillsAreDetected" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.SystemBuilderTest" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.EntitySystemTest.testEntitySystem" />
@@ -758,26 +908,27 @@
     <frame x="-1" y="-5" width="1682" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3447514" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25275397" sideWeight="0.67403316" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25275397" sideWeight="0.65524864" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24908201" sideWeight="0.67403316" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32596686" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32596686" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281768" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3436464" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928178" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -842,132 +993,102 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/util/SingletonSet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/util/package.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="3" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
+        <state line="6" column="28" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/SingletonComponentConnection.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/overview.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0">
+        <state line="9" column="8" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../javesi-test/javesi-test.iml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/package.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="6" column="89" selection-start="154" selection-end="154" vertical-scroll-proportion="0.10514019">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/Component.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/job/Job.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="17" selection-start="207" selection-end="207" vertical-scroll-proportion="0.23156089">
+        <state line="10" column="17" selection-start="231" selection-end="231" vertical-scroll-proportion="0.17045455" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="65" selection-start="931" selection-end="931" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../javesi-test/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/status/EntitySystemStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="34" selection-start="613" selection-end="613" vertical-scroll-proportion="0.4116638">
+        <state line="6" column="0" selection-start="109" selection-end="109" vertical-scroll-proportion="0.10227273" />
+      </provider>
+    </entry>
+    <entry file="jar:///usr/local/java/jdk1.7/src.zip!/java/lang/ClassValue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="22" selection-start="954" selection-end="954" vertical-scroll-proportion="0.017045455" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/javesi/SystemBuilderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="13" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../javesi-test/src/main/java/org/javesi/test/TestEntitySystem.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/javesi/EntitySystemTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="343" selection-end="343" vertical-scroll-proportion="0.025728988">
+        <state line="140" column="93" selection-start="5567" selection-end="5567" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/test/TestJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="682" selection-end="682" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="0" selection-start="1088" selection-end="1088" vertical-scroll-proportion="0.5568182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/test/TestEntitySystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="92" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.45454547" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="186" column="47" selection-start="5293" selection-end="5293" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///var/www/test/shipanim/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="16" selection-start="375" selection-end="375" vertical-scroll-proportion="0.017523365" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/EntitySystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="327" column="8" selection-start="11897" selection-end="11897" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="19" selection-start="3027" selection-end="3027" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/Job.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="53" selection-start="182" selection-end="182" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../javesi-test/src/main/java/org/javesi/test/TestJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="176" selection-end="176" vertical-scroll-proportion="0.10291595">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="13" selection-start="3336" selection-end="3336" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getIdGenerator#0;class#EntitySystemBuilder#0" expanded="false" />
-            <element signature="method#getComponentMapCapacity#0;class#EntitySystemBuilder#0" expanded="false" />
-            <element signature="method#getComponentMapLoadFactor#0;class#EntitySystemBuilder#0" expanded="false" />
-            <element signature="method#getComponentMapConcurrencyLevel#0;class#EntitySystemBuilder#0" expanded="false" />
-            <element signature="method#getEntityMapConcurrencyLevel#0;class#EntitySystemBuilder#0" expanded="false" />
-            <element signature="method#getEntityMapLoadFactor#0;class#EntitySystemBuilder#0" expanded="false" />
-            <element signature="method#getEntityMapCapacity#0;class#EntitySystemBuilder#0" expanded="false" />
-            <element signature="method#getComponentClasses#0;class#EntitySystemBuilder#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/ConstantIdGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="19" selection-start="523" selection-end="523" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#isAlive#0;class#Entity#0" expanded="false" />
-            <element signature="method#setAlive#0;class#Entity#0" expanded="false" />
-            <element signature="method#getId#0;class#Entity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/EntitySystemInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="32" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/test/TestEntitySystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="343" selection-end="343" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/javesi/EntitySystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="137" column="15" selection-start="5789" selection-end="5789" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/javesi/EntitySystemTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="246" column="46" selection-start="8430" selection-end="8430" vertical-scroll-proportion="4.86631">
+        <state line="30" column="0" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.5113636">
           <folding />
         </state>
       </provider>

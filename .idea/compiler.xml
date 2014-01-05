@@ -28,6 +28,9 @@
         <module name="javesy" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="javesi" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
